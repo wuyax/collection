@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>tooltip</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    img {
+      vertical-align: middle;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    #myChart {
+      width: 1000px;
+      height: 700px;
+      margin: 100px auto;
+    }
+    body,html{
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      background: #3c4262;
+    }
+    #myChart{
+      width: 800px;
+      height: 500px;
+      margin: 150px auto;
+      background: #3c4262;
+    }
+    .tip span{
+      color: #7b7de5;
+    }
+    .tip small{
+      color: #ccc;
+      padding-left: 80px;
+    }
+    .tip small b{
+      color: #7b7de5;
+    }
+    .list,.courseWare{
+      padding: 0;
+      margin: 0;
+    }
+    .list li,.courseWare li{
+      list-style: none;
+    }
+    .list li span,.courseWare li span{
+      width: 115px;
+      height: 24px;
+      display: inline-block;
+      line-height: 24px;
+      border-bottom: 1px solid #ccc;
+      overflow:hidden;text-overflow:ellipsis;
+      vertical-align: middle;
+    }
+    .list li b{
+      display: inline-block;
+      margin-left: 4px;
+      width: 14px;
+      height: 13px;
+      vertical-align: middle;
+      background: url("star1.png") no-repeat;
+      background-size: 100% 100%;
+    }
+    .star{
+      display: inline-block;
+      width: 14px;
+      height: 13px;
+      background: url("star.png") no-repeat !important;
+      background-size: 100% 100%;
+    }
+    .list li a,.courseWare li a{
+      text-decoration: none;
+      width: 45px;
+      height: 16px;
+      text-align: center;
+      line-height: 16px;
+      border: 1px solid #7b7de5;
+      border-radius: 5px;
+      color: #7b7de5;
+      display: inline-block;
+      margin-left: 20px;
+      vertical-align: middle;
+    }
+    .list li a:hover,.courseWare li a:hover,.courseBtn:hover{
+      background: #7b7de5;
+      color: #fff;
+    }
+    .courseWare{
+      margin-top: 14px;
+    }
+    .courseWare li small{
+      display: inline-block;
+      margin-left: 10px;
+      margin-right: 6px;
+    }
+    .courseBtn{
+      width: 100%;
+      height: 34px;
+      color: #fff;
+      background: #bfc6d8;
+      border: none;
+      outline: none;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+<div id="myChart"></div>
+</body>
+<script type="text/javascript" src="../js/echarts.min.js"></script>
+<script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+  var myChart = echarts.init(document.getElementById('myChart'));
+  var option = {
+    title: {
+      text: '16年1月-16年12月充值客单分析',
+      textStyle: {
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 26,
+      },
+      top: 10,
+      left: 20,
+    },
+    grid: {
+      top: '15%',
+    },
+    backgroundColor: 'rgb(53, 74, 87)',
+    /*tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'shadow',
+      }
+    },*/
+    tooltip: {
+      enterable:true,
+      //alwaysShowContent:true,
+      hideDelay:100,
+      backgroundColor: 'rgba(255,255,255,1)',//背景颜色（此时为默认色）
+      borderRadius: 5,//边框圆角
+      padding: 14,    // [5, 10, 15, 20] 内边距
+      textStyle:{
+        color:'#000'
+      },
+      position: function (point, params, dom, rect, size) {
+        $(dom).html('<div class="tip"><span>技能块名称名称</span><small>掌握程度：<b>90%</b></small></div><ul class="list"><li><span>技能点的名字撒旦萨达四大神兽</span><b class="star"></b><b class="star"></b><b class="star"></b><b></b><b></b><a href="#">测试</a> </li><li><span>技能点的名字</span><b></b><b></b><b></b><b></b><b></b><a href="#">测试</a></li><li><span>技能点的名字</span><b></b><b></b><b></b><b></b><b></b><a href="#">测试</a></li><li><span>技能点的名字</span><b></b><b></b><b></b><b></b><b></b><a href="#">测试</a></li></ul><ul class="courseWare"><li><span>课件一的名称</span><small>学习时长：<i>8h</i></small><a href="#">学习</a></li><li><span>课件一的名称</span><small>学习时长：<i>8h</i></small><a href="#">学习</a></li></ul><button class="courseBtn">课程测试</button>')
+      }
+    },
+    legend: {
+      data:['老用户','新用户','总'],
+      textStyle: {
+        color: 'rgb(145, 151, 157)',
+      },
+      left: '6%',
+      top: '10%'
+    },
+    xAxis: {
+      axisLine: {
+        lineStyle: {
+          color: 'rgb(145, 151, 157)'
+        }
+      },
+      axisTick: {
+        show: false,
+      },
+      data: [1,2,3,4,5,6,7,8,9,10,11,12]
+    },
+    yAxis: {
+      type: 'value',
+
+      axisLine: {
+        lineStyle: {
+          color: 'rgb(145, 151, 157)'
+        }
+      },
+      axisTick: {
+        show: false,
+      },
+      splitLine: {
+        show: false
+      }
+    },
+
+    series: [{
+      name: '老用户',
+      type: 'bar',
+      itemStyle: {
+        normal: {
+          color: 'rgb(252, 144, 131)'
+        }
+      },
+      stack: '总量',
+      barWidth: '50%',
+      label: {
+        normal: {
+          show: true,
+          position: 'insideTop'
+        }
+      },
+      data: [198.66, 330.81, 151.95, 160.12, 222.56, 229.05, 128.53, 250.91, 224.47, 473.99, 126.85, 260.5]
+    },
+      {
+        name: '新用户',
+        type: 'bar',
+        itemStyle: {
+          normal: {
+            color: 'rgb(30, 189, 180)'
+          }
+        },
+        stack: '总量',
+        barWidth: '50%',
+        label: {
+          normal: {
+            show: true,
+            position: 'top'
+          }
+        },
+        data: [82.89, 67.54, 62.07, 59.43, 67.02, 67.09, 35.66, 71.78, 81.61, 78.85, 79.12, 72.3]
+      },
+      {
+        name: '总',
+        type: 'line',
+        symbol: 'circle',
+        symbolSize: 10,
+        itemStyle: {
+          normal: {
+            color: 'rgb(252, 229, 70)'
+          }
+        },
+        stack: '总量',
+        label: {
+          normal: {
+            show: true,
+          }
+        },
+        data:[281.55, 398.35, 224.02, 219.55, 289.57, 296.14, 164.18, 322.69, 306.08, 552.84, 206.97, 332.79]
+      },]
+  };
+
+  // 使用刚指定的配置项和数据显示图表。
+  myChart.setOption(option);
+</script>
+</html>

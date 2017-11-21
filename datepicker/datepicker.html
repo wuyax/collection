@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>datepicker bootstrap</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <!--<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>-->
+    <script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            vertical-align: middle;
+        }
+
+        ul, ol {
+            list-style: none;
+        }
+
+        #outer {
+            width: 300px;
+            height: 300px;
+            display: none;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="form-group">
+    <label for="dtp_input1" class="col-md-2 control-label">DateTime Picking</label>
+    <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+        <input class="form-control" size="16" type="text" value="" readonly>
+        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+    </div>
+    <input type="hidden" id="dtp_input1" value="" /><br/>
+</div>
+
+<div class="dataSelect">
+    <p class="conT">查询周期：
+    <ul class="tab-date">
+        <li data-neardate="day" class="active">最近一天</li>
+        <li data-neardate="week">最近一周</li>
+        <li data-neardate="month">最近一月</li>
+        <li data-neardate="year">最近一年</li>
+    </ul>
+    <input size="16" type="text" class="form-control form_date form_date_start"/> 至：<input size="16" type="text" class="form-control form_date form_date_end"/></p>
+
+</div>
+
+
+</body>
+<script type="text/javascript">
+    /* 日历插件js部分开始--精确到天*/
+    // 初始化日期显示
+    var d = new Date()
+    var vYear = d.getFullYear()
+    var vMon = d.getMonth() + 1
+    var vDay = d.getDate()
+    var Year_first = vYear + '-01-01';
+    var Year_last = vYear + '-' + (vMon > 10 ? vMon : '0' + vMon) + '-' + (vDay > 9 ? vDay : '0' + vDay)
+    $('.form_date_start').attr('value', Year_first);
+    $('.form_date_end').attr('value', Year_last);
+
+    // 初始化日期
+    var dateRange = {
+        sYear: vYear,
+        sMonth: 1,
+        sDay: 1,
+        eYear: vYear,
+        eMonth: vMon,
+        eDay: vDay
+    };
+    $(".form_date").datetimepicker({
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        startView: 2,
+        minView: 2,
+        language: 'zh-CN',
+        initialDate: new Date(),
+    });
+    // 获取开始时间
+    $('.form_date_start')
+        .datetimepicker()
+        .on('changeDate', function(ev){
+            var y = new Date(ev.date.valueOf()).getFullYear();
+            var m = new Date(ev.date.valueOf()).getMonth()+1;
+            var d = new Date(ev.date.valueOf()).getDate();
+            dateRange.sYear = y;
+            dateRange.sMonth = m;
+            dateRange.sDay = d;
+        });
+    // 获取结束时间
+    $('.form_date_end')
+        .datetimepicker()
+        .on('changeDate', function(ev){
+            var y = new Date(ev.date.valueOf()).getFullYear();
+            var m = new Date(ev.date.valueOf()).getMonth()+1;
+            var d = new Date(ev.date.valueOf()).getDate();
+            dateRange.eYear = y;
+            dateRange.eMonth = m;
+            dateRange.eDay = d;
+        });
+    /* 日历插件js部分结束*/
+
+
+    // 时间选择的切换
+    $('.tab-date').on("click", "li", function (e) {
+        changeDate(this.dataset.neardate)
+    })
+function changeDate(range) {
+    // 本函数可以实现选择一天，一周，一月和一年，需要传递的参数为日期范围，
+    // 保证dataRange对象在当前作用域中可以访问。
+    //今天的时间
+    var today = new Date();
+    today.setTime(today.getTime());
+
+    // 设置今天的日期
+    dateRange.eYear = today.getFullYear();
+    dateRange.eMonth = today.getMonth()+1;
+    dateRange.eDay = today.getDate();
+    // 点击切换
+    if(range === "day"){
+        //昨天的时间
+        var yesterday = new Date();
+        yesterday.setTime(yesterday.getTime()-24*60*60*1000);
+        dateRange.sYear = yesterday.getFullYear();
+        dateRange.sMonth = yesterday.getMonth()+1;
+        dateRange.sDay = yesterday.getDate();
+        $('.form_date_start').attr('value', dateRange.sYear+"-"+(dateRange.sMonth>9?dateRange.sMonth:"0"+dateRange.sMonth)+"-"+(dateRange.sDay>9?dateRange.sDay:"0"+dateRange.sDay));
+        $('.form_date_end').attr('value', dateRange.eYear+"-"+(dateRange.eMonth>9?dateRange.eMonth:"0"+dateRange.eMonth)+"-"+(dateRange.eDay>9?dateRange.eDay:"0"+dateRange.eDay));
+
+    } else if(range === "week"){
+        //一星期前的时间
+        var lastweek = new Date();
+        lastweek.setTime(lastweek.getTime()-7*24*60*60*1000);
+        dateRange.sYear = lastweek.getFullYear();
+        dateRange.sMonth = lastweek.getMonth()+1;
+        dateRange.sDay = lastweek.getDate();
+        $('.form_date_start').attr('value', dateRange.sYear+"-"+(dateRange.sMonth>9?dateRange.sMonth:"0"+dateRange.sMonth)+"-"+(dateRange.sDay>9?dateRange.sDay:"0"+dateRange.sDay));
+        $('.form_date_end').attr('value', dateRange.eYear+"-"+(dateRange.eMonth>9?dateRange.eMonth:"0"+dateRange.eMonth)+"-"+(dateRange.eDay>9?dateRange.eDay:"0"+dateRange.eDay));
+    } else if(range === "month"){
+        // 一个月前的时间
+        var lastmonth = new Date();
+        lastmonth.setMonth(lastmonth.getMonth()-1);
+        dateRange.sYear = lastmonth.getFullYear();
+        dateRange.sMonth = lastmonth.getMonth()+1;
+        dateRange.sDay = lastmonth.getDate();
+        $('.form_date_start').attr('value', dateRange.sYear+"-"+(dateRange.sMonth>9?dateRange.sMonth:"0"+dateRange.sMonth)+"-"+(dateRange.sDay>9?dateRange.sDay:"0"+dateRange.sDay));
+        $('.form_date_end').attr('value', dateRange.eYear+"-"+(dateRange.eMonth>9?dateRange.eMonth:"0"+dateRange.eMonth)+"-"+(dateRange.eDay>9?dateRange.eDay:"0"+dateRange.eDay));
+    } else if(range === "year"){
+        // 一年前的日期
+        var lastyear = new Date();
+        lastyear.setFullYear(lastyear.getFullYear()-1);
+        dateRange.sYear = lastyear.getFullYear();
+        dateRange.sMonth = lastyear.getMonth()+1;
+        dateRange.sDay = lastyear.getDate();
+        $('.form_date_start').attr('value', dateRange.sYear+"-"+(dateRange.sMonth>9?dateRange.sMonth:"0"+dateRange.sMonth)+"-"+(dateRange.sDay>9?dateRange.sDay:"0"+dateRange.sDay));
+        $('.form_date_end').attr('value', dateRange.eYear+"-"+(dateRange.eMonth>9?dateRange.eMonth:"0"+dateRange.eMonth)+"-"+(dateRange.eDay>9?dateRange.eDay:"0"+dateRange.eDay));
+    }
+}
+
+    /*
+    $(".form_m").datetimepicker({
+        format: 'yyyy-mm',
+        autoclose: true,
+        startView: 3,
+        minView: 3,
+        language: 'zh-CN',
+        initialDate: '2009-05-09',
+        viewSelect: 'decade'
+    });
+    $('.form-m')
+        .datetimepicker()
+        .on('changeDate', function(ev){
+            var y = new Date(ev.date.valueOf()).getFullYear();
+            var m = new Date(ev.date.valueOf()).getMonth()+1;
+            console.log(y +'-'+ m)
+        });
+
+    $(".form_y").datetimepicker({
+        format: 'yyyy',
+        autoclose: true,
+        startView: 4,
+        minView: 4,
+        language: 'zh-CN'
+    });
+    $('.form_y')
+        .datetimepicker()
+        .on('changeDate', function(ev){
+            var m = new Date(ev.date.valueOf()).getFullYear();
+            console.log(m)
+        });*/
+</script>
+</html>
