@@ -32,9 +32,10 @@
     }
 
     .help {
-      width:100%;
+      width: 100%;
       height: 1000px;
     }
+
     #bg {
       color: #fff;
       width: 80%;
@@ -73,22 +74,22 @@
   text there text theretext theretext theretext theretext theretext theretext theretext there<br/>
   text there text theretext theretext theretext theretext theretext theretext theretext there<br/>
 
-  <canvas id="can" width="500"; height="500";></canvas>
+  <canvas id="can" width="500" ; height="500" ;></canvas>
 </div>
 </body>
 <script type="text/javascript">
-// 添加事件监听
-window.addEventListener('resize',function () {
-  fullFill('bg','can')
-})
-// 调用绘制方法
-  fullFill('bg','can')
+  // 添加事件监听
+  window.addEventListener('resize', function () {
+    fullFill('bg', 'can')
+  })
+  // 调用绘制方法
+  fullFill('bg', 'can')
 
-/**
- * 绘制和背景图片一致的图片
- * @param parId 父元素容器ID
- * @param canID canvas容器ID
- */
+  /**
+   * 绘制和背景图片一致的图片
+   * @param parId 父元素容器ID
+   * @param canID canvas容器ID
+   */
   function fullFill(parId, canID) {
 
     // 父元素DOM
@@ -97,13 +98,13 @@ window.addEventListener('resize',function () {
     var ctx = canvas.getContext('2d');
 
     // 得到父元素的CSS参数 兼容处理
-    if(window.getComputedStyle) {
+    if (window.getComputedStyle) {
       var parDomW = parseFloat(window.getComputedStyle(parDom, null).width);
       var parDomH = parseFloat(window.getComputedStyle(parDom, null).height);
       var bgUrl = window.getComputedStyle(parDom, null).backgroundImage
       var canDomW = parseFloat(window.getComputedStyle(canvas, null).width);
       var canDomH = parseFloat(window.getComputedStyle(canvas, null).height);
-    }else{
+    } else {
       var parDomW = parDom.currentStyle.width;
       var canDomW = canvas.currentStyle.width;
       var parDomH = parDom.currentStyle.height;
@@ -127,7 +128,7 @@ window.addEventListener('resize',function () {
     var nWidth = 0
     var nHeight = 0
     // 图片加载完成以后执行绘制
-    img.onload= function () {
+    img.onload = function () {
       // 获取图片的真实宽高
       nWidth = img.naturalWidth
       nHeight = img.naturalHeight
@@ -139,25 +140,25 @@ window.addEventListener('resize',function () {
       // 因子 本质上就是超出屏幕的部分
       var factor = 0
 
-      if(parDomH/parDomW > nHeight/nWidth){
+      if (parDomH / parDomW > nHeight / nWidth) {
         // 说明 高度变高或者宽度变窄了，这时候以高度为准了
-        scale = parDomH/nHeight;
-        factor  = (nWidth * scale - parDomW)/2/scale
+        scale = parDomH / nHeight;
+        factor = (nWidth * scale - parDomW) / 2 / scale
         flag = 1
       } else {
-        scale = parDomW/nWidth;
-        factor  = (nHeight * scale - parDomH)/2/scale
+        scale = parDomW / nWidth;
+        factor = (nHeight * scale - parDomH) / 2 / scale
         flag = 2
       }
 
-      if(flag === 1){
-        ctx.drawImage(img, (x2-x1)/scale + factor, ((y2-y1)/scale), canDomW/scale,canDomH/scale, 0,0, canDomW,canDomH);
+      if (flag === 1) {
+        ctx.drawImage(img, (x2 - x1) / scale + factor, ((y2 - y1) / scale), canDomW / scale, canDomH / scale, 0, 0, canDomW, canDomH);
         console.log(factor)
 
       }
-      if(flag === 2){
+      if (flag === 2) {
         console.log(factor)
-        ctx.drawImage(img, (x2-x1)/scale, ((y2-y1)/scale + factor), canDomW/scale,canDomH/scale, 0,0, canDomW,canDomH);
+        ctx.drawImage(img, (x2 - x1) / scale, ((y2 - y1) / scale + factor), canDomW / scale, canDomH / scale, 0, 0, canDomW, canDomH);
       }
     }
   }

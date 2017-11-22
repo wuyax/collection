@@ -1,92 +1,94 @@
 <!DOCTYPE html>
 <html>
-<head >
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>jquery操作checkbox方法（全选、全不选、至少选择一个、选择值/文本）</title>
-    <script type="text/javascript" src="jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" >
-        //全选
-        function selectAll() {
-            //方法一：
-            $("input[name='bjjb']").attr("checked",true);
-            //方法二：
-            /**$("input[name='bjjb']").each(function(){
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>jquery操作checkbox方法（全选、全不选、至少选择一个、选择值/文本）</title>
+  <script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+  <script type="text/javascript">
+    //全选
+    function selectAll() {
+      //方法一：
+      $("input[name='bjjb']").attr("checked", true);
+      //方法二：
+      /**$("input[name='bjjb']").each(function(){
                   $(this).attr("checked",true);
              });*/
-            //获得checkbox的值和文本
-            $("#checked").html("");
-            $("#checkedText").html("");
-            $("input[name='bjjb']:checked").each(function () {
-                $("#checked").append($(this).val()+",");
-                //注意文本一定要元素标签如span否则next得不到值
-                $("#checkedText").append($(this).next().text()+",");
-            });
+      //获得checkbox的值和文本
+      $("#checked").html("");
+      $("#checkedText").html("");
+      $("input[name='bjjb']:checked").each(function () {
+        $("#checked").append($(this).val() + ",");
+        //注意文本一定要元素标签如span否则next得不到值
+        $("#checkedText").append($(this).next().text() + ",");
+      });
+    }
+    //取消全选
+    function selectNone() {
+      //方法一：
+      $("input[name='bjjb']").removeAttr("checked");
+      //方法二：
+      /*$("input[name='bjjb']").each(function(){
+       $(this).attr("checked",false);
+       });*/
+      //获得checkbox的值和文本
+      $("#checked").html("");
+      $("#checkedText").html("");
+      $("input[name='bjjb']:checked").each(function () {
+        $("#checked").append($(this).val() + ",");
+        //注意文本一定要元素标签如span否则next得不到值
+        $("#checkedText").append($(this).next().text() + ",");
+      });
+    }
+    //反选
+    function selectInvert() {
+      $("input[name='bjjb']").each(function (index, item) {
+        if ($(this).attr("checked")) {
+          $(this).removeAttr("checked");
+        } else {
+          $(this).attr("checked", true);
         }
-        //取消全选
-        function selectNone(){
-            //方法一：
-            $("input[name='bjjb']").removeAttr("checked");
-            //方法二：
-            /*$("input[name='bjjb']").each(function(){
-             $(this).attr("checked",false);
-             });*/
-            //获得checkbox的值和文本
-            $("#checked").html("");
-            $("#checkedText").html("");
-            $("input[name='bjjb']:checked").each(function () {
-                $("#checked").append($(this).val()+",");
-                //注意文本一定要元素标签如span否则next得不到值
-                $("#checkedText").append($(this).next().text()+",");
-            });
-        }
-        //反选
-        function selectInvert() {
-            $("input[name='bjjb']").each(function(index,item){
-                if ($(this).attr("checked")) {
-                    $(this).removeAttr("checked");
-                } else {
-                    $(this).attr("checked", true);
-                }
-            });
-        }
-        function selectOne() {
-            var checked=$("input[name='bjjb']:checked");
-            if(checked.length==0){
-                alert("请至少选择一个");
-                return ;
-            }
-            $("#checked").html("");
-            $("#checkedText").html("");
-            $("input[name='bjjb']:checked").each(function () {
-                $("#checked").append($(this).val()+",");
-                //注意文本一定要元素标签如span否则next得不到值
-                $("#checkedText").append($(this).next().text()+",");
-            });
+      });
+    }
+    function selectOne() {
+      var checked = $("input[name='bjjb']:checked");
+      if (checked.length == 0) {
+        alert("请至少选择一个");
+        return;
+      }
+      $("#checked").html("");
+      $("#checkedText").html("");
+      $("input[name='bjjb']:checked").each(function () {
+        $("#checked").append($(this).val() + ",");
+        //注意文本一定要元素标签如span否则next得不到值
+        $("#checkedText").append($(this).next().text() + ",");
+      });
 
-        }
+    }
 
 
-    </script>
+  </script>
 </head>
 <body>
-<form  id="" action="" method="post">
-    <div >
-        <input type="checkbox" name="bjjb" value="1"/><span>交通事故</span></br>
-        <input type="checkbox" name="bjjb" value="2"/><span>自然灾害</span></br>
-        <input type="checkbox" name="bjjb" value="3"/><span>恶劣天气</span></br>
-        <input type="checkbox" name="bjjb" value="4"/><span>严重违法行为</span></br>
-        <input type="checkbox" name="bjjb" value="5"/><span>路面损毁</span></br>
-    </div>
-    <div style="margin-top:10px;">
-        <input type="button"   onclick="selectAll()"   value="全选" />
-        <input type="button"   onclick="selectNone()"    value="全不选" />
-        <input type="button"   onclick="selectInvert()"   value="反选" />
-        <input type="button"   onclick="selectOne()"    value="必须选择一个" />
-    </div>
-    <div style="margin-top:10px;">
-        选中项：<div id="checked"></div>
-        选中文本：<div id="checkedText"></div>
-    </div>
+<form id="" action="" method="post">
+  <div>
+    <input type="checkbox" name="bjjb" value="1"/><span>交通事故</span></br>
+    <input type="checkbox" name="bjjb" value="2"/><span>自然灾害</span></br>
+    <input type="checkbox" name="bjjb" value="3"/><span>恶劣天气</span></br>
+    <input type="checkbox" name="bjjb" value="4"/><span>严重违法行为</span></br>
+    <input type="checkbox" name="bjjb" value="5"/><span>路面损毁</span></br>
+  </div>
+  <div style="margin-top:10px;">
+    <input type="button" onclick="selectAll()" value="全选"/>
+    <input type="button" onclick="selectNone()" value="全不选"/>
+    <input type="button" onclick="selectInvert()" value="反选"/>
+    <input type="button" onclick="selectOne()" value="必须选择一个"/>
+  </div>
+  <div style="margin-top:10px;">
+    选中项：
+    <div id="checked"></div>
+    选中文本：
+    <div id="checkedText"></div>
+  </div>
 </form>
 </body>
 <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>

@@ -24,45 +24,55 @@
       height: 700px;
       margin: 100px auto;
     }
-    body,html{
+
+    body, html {
       width: 100%;
       height: 100%;
       box-sizing: border-box;
       background: #3c4262;
     }
-    #myChart{
+
+    #myChart {
       width: 800px;
       height: 500px;
       margin: 150px auto;
       background: #3c4262;
     }
-    .tip span{
+
+    .tip span {
       color: #7b7de5;
     }
-    .tip small{
+
+    .tip small {
       color: #ccc;
       padding-left: 80px;
     }
-    .tip small b{
+
+    .tip small b {
       color: #7b7de5;
     }
-    .list,.courseWare{
+
+    .list, .courseWare {
       padding: 0;
       margin: 0;
     }
-    .list li,.courseWare li{
+
+    .list li, .courseWare li {
       list-style: none;
     }
-    .list li span,.courseWare li span{
+
+    .list li span, .courseWare li span {
       width: 115px;
       height: 24px;
       display: inline-block;
       line-height: 24px;
       border-bottom: 1px solid #ccc;
-      overflow:hidden;text-overflow:ellipsis;
+      overflow: hidden;
+      text-overflow: ellipsis;
       vertical-align: middle;
     }
-    .list li b{
+
+    .list li b {
       display: inline-block;
       margin-left: 4px;
       width: 14px;
@@ -71,14 +81,16 @@
       background: url("star1.png") no-repeat;
       background-size: 100% 100%;
     }
-    .star{
+
+    .star {
       display: inline-block;
       width: 14px;
       height: 13px;
       background: url("star.png") no-repeat !important;
       background-size: 100% 100%;
     }
-    .list li a,.courseWare li a{
+
+    .list li a, .courseWare li a {
       text-decoration: none;
       width: 45px;
       height: 16px;
@@ -91,19 +103,23 @@
       margin-left: 20px;
       vertical-align: middle;
     }
-    .list li a:hover,.courseWare li a:hover,.courseBtn:hover{
+
+    .list li a:hover, .courseWare li a:hover, .courseBtn:hover {
       background: #7b7de5;
       color: #fff;
     }
-    .courseWare{
+
+    .courseWare {
       margin-top: 14px;
     }
-    .courseWare li small{
+
+    .courseWare li small {
       display: inline-block;
       margin-left: 10px;
       margin-right: 6px;
     }
-    .courseBtn{
+
+    .courseBtn {
       width: 100%;
       height: 34px;
       color: #fff;
@@ -141,27 +157,27 @@
     },
     backgroundColor: 'rgb(53, 74, 87)',
     /*tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        type: 'shadow',
-      }
-    },*/
+     trigger: 'axis',
+     axisPointer: {
+     type: 'shadow',
+     }
+     },*/
     tooltip: {
-      enterable:true,
+      enterable: true,
       //alwaysShowContent:true,
-      hideDelay:100,
+      hideDelay: 100,
       backgroundColor: 'rgba(255,255,255,1)',//背景颜色（此时为默认色）
       borderRadius: 5,//边框圆角
       padding: 14,    // [5, 10, 15, 20] 内边距
-      textStyle:{
-        color:'#000'
+      textStyle: {
+        color: '#000'
       },
       position: function (point, params, dom, rect, size) {
         $(dom).html('<div class="tip"><span>技能块名称名称</span><small>掌握程度：<b>90%</b></small></div><ul class="list"><li><span>技能点的名字撒旦萨达四大神兽</span><b class="star"></b><b class="star"></b><b class="star"></b><b></b><b></b><a href="#">测试</a> </li><li><span>技能点的名字</span><b></b><b></b><b></b><b></b><b></b><a href="#">测试</a></li><li><span>技能点的名字</span><b></b><b></b><b></b><b></b><b></b><a href="#">测试</a></li><li><span>技能点的名字</span><b></b><b></b><b></b><b></b><b></b><a href="#">测试</a></li></ul><ul class="courseWare"><li><span>课件一的名称</span><small>学习时长：<i>8h</i></small><a href="#">学习</a></li><li><span>课件一的名称</span><small>学习时长：<i>8h</i></small><a href="#">学习</a></li></ul><button class="courseBtn">课程测试</button>')
       }
     },
     legend: {
-      data:['老用户','新用户','总'],
+      data: ['老用户', '新用户', '总'],
       textStyle: {
         color: 'rgb(145, 151, 157)',
       },
@@ -177,7 +193,7 @@
       axisTick: {
         show: false,
       },
-      data: [1,2,3,4,5,6,7,8,9,10,11,12]
+      data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     },
     yAxis: {
       type: 'value',
@@ -247,7 +263,7 @@
             show: true,
           }
         },
-        data:[281.55, 398.35, 224.02, 219.55, 289.57, 296.14, 164.18, 322.69, 306.08, 552.84, 206.97, 332.79]
+        data: [281.55, 398.35, 224.02, 219.55, 289.57, 296.14, 164.18, 322.69, 306.08, 552.84, 206.97, 332.79]
       },]
   };
 

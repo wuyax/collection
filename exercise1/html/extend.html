@@ -1,203 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Title</title>
-    <style type="text/css">
-        * {
-            margin: 0;
-            padding: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>深拷贝测试</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
 
-        img {
-            vertical-align: middle;
-        }
+    img {
+      vertical-align: middle;
+    }
 
-        ul, ol {
-            list-style: none;
-        }
-    </style>
-    <!--<script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>-->
+    ul, ol {
+      list-style: none;
+    }
+  </style>
+  <!--<script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>-->
 </head>
 
 <body>
 
 </body>
 <script type="text/javascript">
-    var newoption = {
-        age: 17,
-        time: {
-            year: 2017,
-            month: 9,
-            day: 30,
-            clock:[{
-                hh: 12,
-                mm: 39
-            }],
-            doSomething: function () {
-                console.log('shanghai')
-            }
-        }
-    };
-    var oldoption= {
-        name:'zhangsan',
-        time: {
-            day: 20,
-            clock:[{
-                ss: 20
-            }]
-        }
+  var newoption = {
+    age: 17,
+    time: {
+      year: 2017,
+      month: 9,
+      day: 30,
+      clock: [{
+        hh: 12,
+        mm: 39
+      }],
+      doSomething: function () {
+        console.log('shanghai')
+      }
     }
-    var newarr = [{
-        age: 17,
-        time: {
-            year: 2017,
-            month: 9,
-            day: 20
+  };
+  var oldoption = {
+    name: 'zhangsan',
+    time: {
+      day: 20,
+      clock: [{
+        ss: 20
+      }]
+    }
+  }
+  var newarr = [{
+    age: 17,
+    time: {
+      year: 2017,
+      month: 9,
+      day: 20
+    }
+  }];
+  var oldarr = [
+    {
+      name: 'zhangsan',
+      time: {
+        day: 30
+      }
+    }
+  ]
+  /*function extend(override,des, src){
+   if(src instanceof Array){
+   for(var i = 0, len = src.length; i < len; i++)
+   extend(des, src[i], override);
+   }
+   for( var i in src){
+   if(override || !(i in des)){
+   des[i] = src[i];
+   }
+   }
+   return des;
+   }*/
+  /*var extend = (function() {
+   var isObjFunc = function(name) {
+   var toString = Object.prototype.toString
+   return function() {
+   return toString.call(arguments[0]) === '[object ' + name + ']'
+   }
+   }
+   var   isObject = isObjFunc('Object'),
+   isArray = isObjFunc('Array'),
+   isBoolean = isObjFunc('Boolean')
+   return function extend() {
+   var index = 0,isDeep = false,obj,copy,destination,source,i
+   if(isBoolean(arguments[0])) {
+   index = 1
+   isDeep = arguments[0]
+   }
+   for(i = arguments.length - 1;i>index;i--) {
+   destination = arguments[i - 1]
+   source = arguments[i]
+   if(isObject(source) || isArray(source)) {
+   console.log(source)
+   for(var property in source) {
+   obj = source[property]
+   if(isDeep && ( isObject(obj) || isArray(obj) ) ) {
+   copy = isObject(obj) ? {} : []
+   var extended = extend(isDeep,copy,obj)
+   destination[property] = extended
+   }else {
+   destination[property] = source[property]
+   }
+   }
+   } else {
+   destination = source
+   }
+   }
+   return destination
+   }
+   })()*/
+
+  $ = function () {
+    var copyIsArray,
+      toString = Object.prototype.toString,
+      hasOwn = Object.prototype.hasOwnProperty,
+
+      class2type = {
+        '[object Boolean]': 'boolean',
+        '[object Number]': 'number',
+        '[object String]': 'string',
+        '[object Function]': 'function',
+        '[object Array]': 'array',
+        '[object Date]': 'date',
+        '[object RegExp]': 'regExp',
+        '[object Object]': 'object'
+      },
+
+      type = function (obj) {
+        return obj == null ? String(obj) : class2type[toString.call(obj)] || "object";
+      },
+
+      isWindow = function (obj) {
+        return obj && typeof obj === "object" && "setInterval" in obj;
+      },
+
+      isArray = Array.isArray || function (obj) {
+          return type(obj) === "array";
+        },
+
+      isPlainObject = function (obj) {
+        if (!obj || type(obj) !== "object" || obj.nodeType || isWindow(obj)) {
+          return false;
         }
-    }];
-    var oldarr = [
-        {
-            name:'zhangsan',
-            time: {
-                day: 30
+
+        if (obj.constructor && !hasOwn.call(obj, "constructor")
+          && !hasOwn.call(obj.constructor.prototype, "isPrototypeOf")) {
+          return false;
+        }
+
+        var key;
+        for (key in obj) {
+        }
+
+        return key === undefined || hasOwn.call(obj, key);
+      },
+
+      extend = function (deep, target, options) {
+        for (var name in options) {
+          var src = target[name];
+          var copy = options[name];
+
+          if (target === copy) {
+            continue;
+          }
+
+          if (deep && copy
+            && (isPlainObject(copy) || (copyIsArray = isArray(copy)))) {
+            if (copyIsArray) {
+              copyIsArray = false;
+              var clone = src && isArray(src) ? src : [];
+
+            } else {
+              var clone = src && isPlainObject(src) ? src : {};
             }
+
+            target[name] = extend(deep, clone, copy);
+          } else if (copy !== undefined) {
+            target[name] = copy;
+          }
         }
-    ]
-    /*function extend(override,des, src){
-        if(src instanceof Array){
-            for(var i = 0, len = src.length; i < len; i++)
-                extend(des, src[i], override);
-        }
-        for( var i in src){
-            if(override || !(i in des)){
-                des[i] = src[i];
-            }
-        }
-        return des;
-    }*/
-    /*var extend = (function() {
-        var isObjFunc = function(name) {
-            var toString = Object.prototype.toString
-            return function() {
-                return toString.call(arguments[0]) === '[object ' + name + ']'
-            }
-        }
-        var   isObject = isObjFunc('Object'),
-            isArray = isObjFunc('Array'),
-            isBoolean = isObjFunc('Boolean')
-        return function extend() {
-            var index = 0,isDeep = false,obj,copy,destination,source,i
-            if(isBoolean(arguments[0])) {
-                index = 1
-                isDeep = arguments[0]
-            }
-            for(i = arguments.length - 1;i>index;i--) {
-                destination = arguments[i - 1]
-                source = arguments[i]
-                if(isObject(source) || isArray(source)) {
-                    console.log(source)
-                    for(var property in source) {
-                        obj = source[property]
-                        if(isDeep && ( isObject(obj) || isArray(obj) ) ) {
-                            copy = isObject(obj) ? {} : []
-                            var extended = extend(isDeep,copy,obj)
-                            destination[property] = extended
-                        }else {
-                            destination[property] = source[property]
-                        }
-                    }
-                } else {
-                    destination = source
-                }
-            }
-            return destination
-        }
-    })()*/
 
-    $ = function() {
-        var copyIsArray,
-            toString = Object.prototype.toString,
-            hasOwn = Object.prototype.hasOwnProperty,
+        return target;
+      };
 
-            class2type = {
-                '[object Boolean]' : 'boolean',
-                '[object Number]' : 'number',
-                '[object String]' : 'string',
-                '[object Function]' : 'function',
-                '[object Array]' : 'array',
-                '[object Date]' : 'date',
-                '[object RegExp]' : 'regExp',
-                '[object Object]' : 'object'
-            },
+    return {extend: extend};
+  }();
 
-            type = function(obj) {
-                return obj == null ? String(obj) : class2type[toString.call(obj)] || "object";
-            },
-
-            isWindow = function(obj) {
-                return obj && typeof obj === "object" && "setInterval" in obj;
-            },
-
-            isArray = Array.isArray || function(obj) {
-                    return type(obj) === "array";
-                },
-
-            isPlainObject = function(obj) {
-                if (!obj || type(obj) !== "object" || obj.nodeType || isWindow(obj)) {
-                    return false;
-                }
-
-                if (obj.constructor && !hasOwn.call(obj, "constructor")
-                    && !hasOwn.call(obj.constructor.prototype, "isPrototypeOf")) {
-                    return false;
-                }
-
-                var key;
-                for (key in obj) {
-                }
-
-                return key === undefined || hasOwn.call(obj, key);
-            },
-
-            extend = function(deep, target, options) {
-                for (var name in options) {
-                    var src = target[name];
-                    var copy = options[name];
-
-                    if (target === copy) { continue; }
-
-                    if (deep && copy
-                        && (isPlainObject(copy) || (copyIsArray = isArray(copy)))) {
-                        if (copyIsArray) {
-                            copyIsArray = false;
-                            var clone = src && isArray(src) ? src : [];
-
-                        } else {
-                            var clone = src && isPlainObject(src) ? src : {};
-                        }
-
-                        target[name] = extend(deep, clone, copy);
-                    } else if (copy !== undefined) {
-                        target[name] = copy;
-                    }
-                }
-
-                return target;
-            };
-
-        return { extend : extend };
-    }();
-
-
-
-
-    console.log($.extend(true, oldoption, newoption));
-
-    /*oldoption = extend(true, oldoption, newoption)
-    console.log(oldoption);*/
-//    console.log(extend(true, oldarr, newarr));
+  console.log($.extend(true, oldoption, newoption));
 </script>
 </html>
