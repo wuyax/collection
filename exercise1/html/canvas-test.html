@@ -77,13 +77,18 @@
 </div>
 </body>
 <script type="text/javascript">
-
+// 添加事件监听
 window.addEventListener('resize',function () {
   fullFill('bg','can')
 })
-
+// 调用绘制方法
   fullFill('bg','can')
 
+/**
+ * 绘制和背景图片一致的图片
+ * @param parId 父元素容器ID
+ * @param canID canvas容器ID
+ */
   function fullFill(parId, canID) {
 
     // 父元素DOM
