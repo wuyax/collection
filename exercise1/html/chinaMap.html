@@ -160,23 +160,7 @@
       "value": 3.96
     }
   ]
-var mapData2 = [
-  {
-    "name": "宁夏",
-    "id": "640000",
-    "value": 4.9
-  },
-  {
-    "name": "辽宁",
-    "id": "210000",
-    "value": 11.41
-  },
-  {
-    "name": "河北",
-    "id": "130000",
-    "value": 223.96
-  }
-]
+
   // 初始化地图
   var myChart = echarts.init(document.getElementById('map'))
   var option = {
@@ -184,7 +168,6 @@ var mapData2 = [
       trigger: 'item',
       backgroundColor: '#159847',
       formatter: function (params) {
-        console.log(params)
         let values = params.value;
         if (!values) {
           return;
@@ -266,34 +249,6 @@ var mapData2 = [
           }
         },
         data: mapData
-      },
-      {
-        name: '苹果',
-        type: 'map',
-        map: 'china',
-        zoom: '1.4',
-        left: '20%',
-        roam: true,
-        silent: false,
-        label: {
-          normal: {
-            show: true
-          },
-          emphasis: {
-            show: false
-          }
-        },
-        roam: true,
-        itemStyle: {
-          normal: {
-            areaColor: '#fff',
-            borderColor: '#20508a'
-          },
-          emphasis: {
-            areaColor: '#3952ca'
-          }
-        },
-        data: mapData2
       },
     ]
   };
