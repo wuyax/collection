@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
   <script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
   <script type="text/javascript" src="../js/echarts.min.js"></script>
-  <title>中国地图双层</title>
+  <title>中国地图背景色不会变为空了</title>
   <style type="text/css">
     * {
       margin: 0;
@@ -21,7 +21,7 @@
       list-style: none;
     }
 
-    body {
+    html, body {
       width: 100%;
       height: 100%;
       background-color: #787D7B;
@@ -29,7 +29,7 @@
 
     #map {
       width: 100%;
-      height: 1000px;
+      height: 100%;
     }
   </style>
 </head>
@@ -42,7 +42,7 @@
     {
       "name": "重庆",
       "id": "500000",
-      "value": 11.24
+      "value": 8.24
     },
     {
       "name": "湖南",
@@ -161,6 +161,7 @@
     }
   ]
 
+  // 初始化地图
   var myChart = echarts.init(document.getElementById('map'))
   var option = {
     tooltip: {
@@ -186,40 +187,33 @@
         seriesIndex: 0,
         pieces: [{
           min: 9,
-          color: '#187242'
         }, {
           min: 8,
           max: 9,
-          color: '#159847',
-
         }, {
           min: 7,
           max: 8,
-          color: '#27bf42'
         }, {
           min: 6,
           max: 7,
-          color: '#59da3b'
-
         }, {
           min: 5,
           max: 6,
-          color: '#c9f573'
-
         }, {
           min: 3,
           max: 5,
-          color: '#f2f7b3'
         }],
         left: '4%',
         bottom: '6%',
         itemGap: 0,
         itemWidth: 20,
         itemHeight: 30,
+        // 下面这两个配置项是这个demo的主要代码
         inRange: {
           symbol: 'rect',
-          color:['#f2f7b3','#c9f573','#59da3b','#27bf42','#159847','#187242']
+          color: ['#f2f7b3', '#c9f573', '#59da3b', '#27bf42', '#159847', '#187242']
         },
+        // 关键所在
         outOfRange: {
           color: '#fff'
         },
@@ -238,7 +232,7 @@
         silent: false,
         label: {
           normal: {
-            show: false
+            show: true
           },
           emphasis: {
             show: false
@@ -247,7 +241,6 @@
         roam: true,
         itemStyle: {
           normal: {
-            //areaColor: 'rgba(76, 159, 129,0.9)',
             areaColor: '#fff',
             borderColor: '#20508a'
           },
@@ -260,8 +253,11 @@
     ]
   };
 
+  // 获取地图的JSON数据
   $.get('../json/china.json', function (res, req) {
+    // 注册地图
     echarts.registerMap('china', res);
+    // 渲染地图
     myChart.setOption(option);
   })
 

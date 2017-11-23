@@ -9,6 +9,7 @@ small tool use for dev myself
 - flex布局的测试 `flex_test.html`
 - echarts图表的toolTip 的测试  `toolTip.html`
 - echarts图表的联系测试 `mychart.html`
+- echarts中国地图的背景设置和visualMap的背景 联动取消选中的时候可以指定颜色 `chianMap.html`
 # Learn Funtional Programming 文件夹
 对函数式编程充满了好奇，这里是一些测试用的demo，
 本测试都是基于 `underscore.js` 更多API参见[官方文档](http://underscorejs.org/) 当然你也可以查看中文文档版本有细微差别 [中文网站](http://www.bootcss.com/p/underscore/)
