@@ -219,8 +219,7 @@
       backgroundColor: '#159847',
       formatter: function (params) {
         let str = `<div style="text-align: left">
-                  <p>${params.name}</p>
-                    </div>`
+                    <p>${params.name}</p>`
         option.series.forEach((item, index)=>{
           let el = item.data.find((ele, i)=>{
                 return ele.name === params.name
@@ -230,7 +229,7 @@
             str += `<p>${option.series[index].name}:${el.value}</p>`
           }
         })
-        return str
+        return str + `</div>`
       }
     },
     legend: {
