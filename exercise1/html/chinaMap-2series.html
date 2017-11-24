@@ -36,6 +36,7 @@
 
 <body>
 <div id="map"></div>
+
 </body>
 <script type="text/javascript">
   var mapData = [
@@ -160,32 +161,91 @@
       "value": 3.96
     }
   ]
+  var mapData2 = [
+    {
+      "name": "西藏",
+      "id": "500000",
+      "value": 8.24
+    },
+    {
+      "name": "青海",
+      "id": "430000",
+      "value": 10.72
+    },
+    {
+      "name": "云南",
+      "id": "510000",
+      "value": 9.19
+    },
+    {
+      "name": "山西",
+      "id": "450000",
+      "value": 4.56
+    },
+    {
+      "name": "浙江",
+      "id": "330000",
+      "value": 2.02
+    },
+    {
+      "name": "广东",
+      "id": "440000",
+      "value": 8.97
+    },
+    {
+      "name": "福建",
+      "id": "310000",
+      "value": 5.96
+    },
+    {
+      "name": "湖北",
+      "id": "420000",
+      "value": 11.78
+    }
+  ]
+
 
   // 初始化地图
   var myChart = echarts.init(document.getElementById('map'))
   var option = {
+    /**
+     * 地图存在多个series tooltip显示的处理
+     * 当地图有多个series时候默认的tooltip只会显示series[0]的数据
+     * 这个配置项提供一种思路，在tooltip的回调函数中遍历option.series
+     * 通过这种方式的到所有系列的数据
+     */
     tooltip: {
       trigger: 'item',
       backgroundColor: '#159847',
       formatter: function (params) {
-        let values = params.value;
-        if (!values) {
-          return;
-        } else {
-          let str = "鲜苹果批发价格<br>";
-          str += params.name + '：<b style="color:#ffa600;font-weight: bold;font-size:18px;">' + params.value + "</b>元/公斤" + "<br>";
-          return str
-        }
-
+        let str = `<div style="text-align: left">
+                  <p>${params.name}</p>
+                    </div>`
+        option.series.forEach((item, index)=>{
+          let el = item.data.find((ele, i)=>{
+                return ele.name === params.name
+            })
+          console.log(el)
+          if(el){
+            str += `<p>${option.series[index].name}:${el.value}</p>`
+          }
+        })
+        return str
       }
+    },
+    legend: {
+      orient: 'vertical',
+      left: 'left',
+      data:['苹果平均价格','苹果总价格']
     },
     visualMap: [
       {
         type: 'piecewise', //分段型。
         splitNumber: 6,
         inverse: false,
-        seriesIndex: 0,
-        pieces: [{
+//        seriesIndex: 0,
+        pieces: [
+            {
           min: 9,
         }, {
           min: 8,
@@ -208,12 +268,6 @@
         itemGap: 0,
         itemWidth: 20,
         itemHeight: 30,
-        /**
-         * 这一个图片的作用是，当我们通过点击visualMap
-         * 联动开关数据选择范围的时候地图还保留原有的背景颜色，
-         * 实现原理就是下面个配置项
-         * outOfRange: {color: '#fff'},
-         */
         // 下面这两个配置项是这个demo的主要代码
         inRange: {
           symbol: 'rect',
@@ -255,6 +309,33 @@
           }
         },
         data: mapData
+      },{
+        name: '苹果总价格',
+        type: 'map',
+        map: 'china',
+        zoom: '1.2',
+        left: '20%',
+        roam: true,
+        silent: false,
+        label: {
+          normal: {
+            show: true
+          },
+          emphasis: {
+            show: false
+          }
+        },
+        roam: true,
+        itemStyle: {
+          normal: {
+            areaColor: '#fff',
+            borderColor: '#20508a'
+          },
+          emphasis: {
+            areaColor: '#3952ca'
+          }
+        },
+        data: mapData2
       },
     ]
   };
