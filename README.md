@@ -14,3 +14,7 @@ small tool use for dev myself
 # Learn Funtional Programming 文件夹
 对函数式编程充满了好奇，这里是一些测试用的demo，
 本测试都是基于 `underscore.js` 更多API参见[官方文档](http://underscorejs.org/) 当然你也可以查看中文文档版本有细微差别 [中文网站](http://www.bootcss.com/p/underscore/)
+
+### 名词解释
+- 谓词(predicate)： "A predicate is a function that returns bool (or something that can be implicitly converted to bool). Predicates are widely used in the STL. The comparison functions for the standard associative containers are predicates, and predicate functions are commonly passed as parameters to algorithms like find_if and the various sorting algorithms."
+- 数据抽象: 

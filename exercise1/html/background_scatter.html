@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <script type="text/javascript" src="../js/echarts.min.js"></script>
+  <script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
+  <title>给散点图加背景颜色</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    img {
+      vertical-align: middle;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: #787D7B;
+    }
+
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="map"></div>
+</body>
+<script type="text/javascript">
+  let geoCoordMap = {
+    "Amsterdam": [4.895168, 52.370216],
+    "Athens": [-83.357567, 33.951935],
+    "Auckland": [174.763332, -36.84846],
+    "Bangkok": [100.501765, 13.756331],
+    "Barcelona": [2.173403, 41.385064],
+    "Beijing": [116.407395, 39.904211],
+    "Berlin": [13.404954, 52.520007],
+    "Bogotá": [-74.072092, 4.710989],
+    "Bratislava": [17.107748, 48.148596],
+    "Brussels": [4.35171, 50.85034],
+    "Budapest": [19.040235, 47.497912],
+    "Buenos Aires": [-58.381559, -34.603684],
+    "Bucharest": [26.102538, 44.426767],
+    "Caracas": [-66.903606, 10.480594],
+    "Chicago": [-87.629798, 41.878114],
+    "Delhi": [77.209021, 28.613939],
+    "Doha": [51.53104, 25.285447],
+    "Dubai": [55.270783, 25.204849],
+    "Dublin": [-6.26031, 53.349805],
+    "Frankfurt": [8.682127, 50.110922],
+    "Geneva": [6.143158, 46.204391],
+    "Helsinki": [24.938379, 60.169856],
+    "Hong Kong": [114.109497, 22.396428],
+    "Istanbul": [28.978359, 41.008238],
+    "Jakarta": [106.845599, -6.208763],
+    "Johannesburg": [28.047305, -26.204103],
+    "Cairo": [31.235712, 30.04442],
+    "Kiev": [30.5234, 50.4501],
+    "Copenhagen": [12.568337, 55.676097],
+    "Kuala Lumpur": [101.686855, 3.139003],
+    "Lima": [-77.042793, -12.046374],
+    "Lisbon": [-9.139337, 38.722252],
+    "Ljubljana": [14.505751, 46.056947],
+    "London": [-0.127758, 51.507351],
+    "Los Angeles": [-118.243685, 34.052234],
+    "Luxembourg": [6.129583, 49.815273],
+    "Lyon": [4.835659, 45.764043],
+    "Madrid": [-3.70379, 40.416775],
+    "Milan": [9.185924, 45.465422],
+    "Manama": [50.58605, 26.228516],
+    "Manila": [120.984219, 14.599512],
+    "Mexico City": [-99.133208, 19.432608],
+    "Miami": [-80.19179, 25.76168],
+    "Montreal": [-73.567256, 45.501689],
+    "Moscow": [37.6173, 55.755826],
+    "Mumbai": [72.877656, 19.075984],
+    "Munich": [11.581981, 48.135125],
+    "Nairobi": [36.821946, -1.292066],
+    "New York": [-74.005941, 40.712784],
+    "Nicosia": [33.382276, 35.185566],
+    "Oslo": [10.752245, 59.913869],
+    "Paris": [2.352222, 48.856614],
+    "Prague": [14.4378, 50.075538],
+    "Riga": [24.105186, 56.949649],
+    "Rio de Janeiro": [-43.172896, -22.906847],
+    "Rome": [12.496366, 41.902783],
+    "Santiago de Chile": [-70.669265, -33.44889],
+    "São Paulo": [-46.633309, -23.55052],
+    "Seoul": [126.977969, 37.566535],
+    "Shanghai": [121.473701, 31.230416],
+    "Singapore": [103.819836, 1.352083],
+    "Sofia": [23.321868, 42.697708],
+    "Stockholm": [18.068581, 59.329323],
+    "Sydney": [151.209296, -33.86882],
+    "Taipei": [121.565418, 25.032969],
+    "Tallinn": [24.753575, 59.436961],
+    "Tel Aviv": [34.781768, 32.0853],
+    "Tokyo": [139.691706, 35.689487],
+    "Toronto": [-79.383184, 43.653226],
+    "Vilnius": [25.279651, 54.687156],
+    "Warsaw": [21.012229, 52.229676],
+    "Vienna": [16.373819, 48.208174],
+    "Zurich": [8.541694, 47.376887]
+  };
+
+  let rawData = [
+    ["Amsterdam", 101.6],
+    ["Athens", 62.6],
+    ["Auckland", 77.9],
+    ["Bangkok", 26.4],
+    ["Barcelona", 79.7],
+    ["Beijing", 28.2],
+    ["Berlin", 109.7],
+    ["Bogotá", 41.4],
+    ["Bratislava", 51.3],
+    ["Brussels", 107.5],
+    ["Budapest", 35.5],
+    ["Buenos Aires", 42.9],
+    ["Bucharest", 37.1],
+    ["Caracas", 21.9],
+    ["Chicago", 105.3],
+    ["Delhi", 23],
+    ["Doha", 38.8],
+    ["Dubai", 63.5],
+    ["Dublin", 101.9],
+    ["Frankfurt", 102.2],
+    ["Geneva", 116],
+    ["Helsinki", 93],
+    ["Hong Kong", 58.5],
+    ["Istanbul", 39],
+    ["Jakarta", 14.7],
+    ["Johannesburg", 80.6],
+    ["Cairo", 26.2],
+    ["Kiev", 19.5],
+    ["Copenhagen", 122],
+    ["Kuala Lumpur", 41.1],
+    ["Lima", 43.6],
+    ["Lisbon", 65.3],
+    ["Ljubljana", 57.5],
+    ["London", 91.2],
+    ["Los Angeles", 113.8],
+    ["Luxembourg", 111.6],
+    ["Lyon", 81.8],
+    ["Madrid", 83.6],
+    ["Milan", 88.2],
+    ["Manama", 56.4]
+    ["Manila", 19.2],
+    ["Mexico City", 26.8],
+    ["Miami", 106.2],
+    ["Montreal", 93.1],
+    ["Moscow", 45.1],
+    ["Mumbai", 24.9],
+    ["Munich", 108.3],
+    ["Nairobi", 21.4],
+    ["New York", 100],
+    ["Nicosia", 95],
+    ["Oslo", 102.7],
+    ["Paris", 94.8],
+    ["Prague", 45.1],
+    ["Riga", 44.3],
+    ["Rio de Janeiro", 44.4],
+    ["Rome", 69.6],
+    ["Santiago de Chile", 42.8],
+    ["São Paulo", 48.7],
+    ["Seoul", 80.8],
+    ["Shanghai", 37.2],
+    ["Singapore", 50.8],
+    ["Sofia", 32.6],
+    ["Stockholm", 90.2],
+    ["Sydney", 112.5],
+    ["Taipei", 52],
+    ["Tallinn", 47.9],
+    ["Tel Aviv", 57],
+    ["Tokyo", 84.7],
+    ["Toronto", 103.4],
+    ["Vilnius", 42.6],
+    ["Warsaw", 44.3],
+    ["Vienna", 100.6],
+    ["Zurich", 119.1]
+  ];
+
+  var coldata = [
+    {name: 'Afghanistan', value: 28397.812},
+    {name: 'Angola', value: 19549.124},
+    {name: 'Albania', value: 3150.143},
+    {name: 'United Arab Emirates', value: 8441.537},
+    {name: 'Argentina', value: 40374.224},
+    {name: 'Armenia', value: 2963.496},
+    {name: 'French Southern and Antarctic Lands', value: 268.065},
+    {name: 'Australia', value: 22404.488},
+    {name: 'Austria', value: 8401.924},
+    {name: 'Azerbaijan', value: 9094.718},
+    {name: 'Burundi', value: 9232.753},
+    {name: 'Belgium', value: 10941.288},
+    {name: 'Benin', value: 9509.798},
+    {name: 'Burkina Faso', value: 15540.284},
+    {name: 'Bangladesh', value: 151125.475},
+    {name: 'Bulgaria', value: 7389.175},
+    {name: 'The Bahamas', value: 66402.316},
+    {name: 'Bosnia and Herzegovina', value: 3845.929},
+    {name: 'Belarus', value: 9491.07},
+    {name: 'Belize', value: 308.595},
+    {name: 'Bermuda', value: 64.951},
+    {name: 'Bolivia', value: 716.939},
+    {name: 'Brazil', value: 195210.154},
+    {name: 'Brunei', value: 27.223},
+    {name: 'Bhutan', value: 716.939},
+    {name: 'Botswana', value: 1969.341},
+    {name: 'Central African Republic', value: 4349.921},
+    {name: 'Canada', value: 34126.24},
+    {name: 'Switzerland', value: 7830.534},
+    {name: 'Chile', value: 17150.76},
+    {name: 'China', value: 1359821.465},
+    {name: 'Ivory Coast', value: 60508.978},
+    {name: 'Cameroon', value: 20624.343},
+    {name: 'Democratic Republic of the Congo', value: 62191.161},
+    {name: 'Republic of the Congo', value: 3573.024},
+    {name: 'Colombia', value: 46444.798},
+    {name: 'Costa Rica', value: 4669.685},
+    {name: 'Cuba', value: 11281.768},
+    {name: 'Northern Cyprus', value: 1.468},
+    {name: 'Cyprus', value: 1103.685},
+    {name: 'Czech Republic', value: 10553.701},
+    {name: 'Germany', value: 83017.404},
+    {name: 'Djibouti', value: 834.036},
+    {name: 'Denmark', value: 5550.959},
+    {name: 'Dominican Republic', value: 10016.797},
+    {name: 'Algeria', value: 37062.82},
+    {name: 'Ecuador', value: 15001.072},
+    {name: 'Egypt', value: 78075.705},
+    {name: 'Eritrea', value: 5741.159},
+    {name: 'Spain', value: 46182.038},
+    {name: 'Estonia', value: 1298.533},
+    {name: 'Ethiopia', value: 87095.281},
+    {name: 'Finland', value: 5367.693},
+    {name: 'Fiji', value: 860.559},
+    {name: 'Falkland Islands', value: 49.581},
+    {name: 'France', value: 63230.866},
+    {name: 'Gabon', value: 1556.222},
+    {name: 'United Kingdom', value: 62066.35},
+    {name: 'Georgia', value: 4388.674},
+    {name: 'Ghana', value: 24262.901},
+    {name: 'Guinea', value: 10876.033},
+    {name: 'Gambia', value: 1680.64},
+    {name: 'Guinea Bissau', value: 10876.033},
+    {name: 'Equatorial Guinea', value: 696.167},
+    {name: 'Greece', value: 11109.999},
+    {name: 'Greenland', value: 56.546},
+    {name: 'Guatemala', value: 14341.576},
+    {name: 'French Guiana', value: 231.169},
+    {name: 'Guyana', value: 786.126},
+    {name: 'Honduras', value: 7621.204},
+    {name: 'Croatia', value: 4338.027},
+    {name: 'Haiti', value: 9896.4},
+    {name: 'Hungary', value: 10014.633},
+    {name: 'Indonesia', value: 240676.485},
+    {name: 'India', value: 1205624.648},
+    {name: 'Ireland', value: 4467.561},
+    {name: 'Iran', value: 240676.485},
+    {name: 'Iraq', value: 30962.38},
+    {name: 'Iceland', value: 318.042},
+    {name: 'Israel', value: 7420.368},
+    {name: 'Italy', value: 60508.978},
+    {name: 'Jamaica', value: 2741.485},
+    {name: 'Jordan', value: 6454.554},
+    {name: 'Japan', value: 127352.833},
+    {name: 'Kazakhstan', value: 15921.127},
+    {name: 'Kenya', value: 40909.194},
+    {name: 'Kyrgyzstan', value: 5334.223},
+    {name: 'Cambodia', value: 14364.931},
+    {name: 'South Korea', value: 51452.352},
+    {name: 'Kosovo', value: 97.743},
+    {name: 'Kuwait', value: 2991.58},
+    {name: 'Laos', value: 6395.713},
+    {name: 'Lebanon', value: 4341.092},
+    {name: 'Liberia', value: 3957.99},
+    {name: 'Libya', value: 6040.612},
+    {name: 'Sri Lanka', value: 20758.779},
+    {name: 'Lesotho', value: 2008.921},
+    {name: 'Lithuania', value: 3068.457},
+    {name: 'Luxembourg', value: 507.885},
+    {name: 'Latvia', value: 2090.519},
+    {name: 'Morocco', value: 31642.36},
+    {name: 'Moldova', value: 103.619},
+    {name: 'Madagascar', value: 21079.532},
+    {name: 'Mexico', value: 117886.404},
+    {name: 'Macedonia', value: 507.885},
+    {name: 'Mali', value: 13985.961},
+    {name: 'Myanmar', value: 51931.231},
+    {name: 'Montenegro', value: 620.078},
+    {name: 'Mongolia', value: 2712.738},
+    {name: 'Mozambique', value: 23967.265},
+    {name: 'Mauritania', value: 3609.42},
+    {name: 'Malawi', value: 15013.694},
+    {name: 'Malaysia', value: 28275.835},
+    {name: 'Namibia', value: 2178.967},
+    {name: 'New Caledonia', value: 246.379},
+    {name: 'Niger', value: 15893.746},
+    {name: 'Nigeria', value: 159707.78},
+    {name: 'Nicaragua', value: 5822.209},
+    {name: 'Netherlands', value: 16615.243},
+    {name: 'Norway', value: 4891.251},
+    {name: 'Nepal', value: 26846.016},
+    {name: 'New Zealand', value: 4368.136},
+    {name: 'Oman', value: 2802.768},
+    {name: 'Pakistan', value: 173149.306},
+    {name: 'Panama', value: 3678.128},
+    {name: 'Peru', value: 29262.83},
+    {name: 'Philippines', value: 93444.322},
+    {name: 'Papua New Guinea', value: 6858.945},
+    {name: 'Poland', value: 38198.754},
+    {name: 'Puerto Rico', value: 3709.671},
+    {name: 'North Korea', value: 1.468},
+    {name: 'Portugal', value: 10589.792},
+    {name: 'Paraguay', value: 6459.721},
+    {name: 'Qatar', value: 1749.713},
+    {name: 'Romania', value: 21861.476},
+    {name: 'Russia', value: 21861.476},
+    {name: 'Rwanda', value: 10836.732},
+    {name: 'Western Sahara', value: 514.648},
+    {name: 'Saudi Arabia', value: 27258.387},
+    {name: 'Sudan', value: 35652.002},
+    {name: 'South Sudan', value: 9940.929},
+    {name: 'Senegal', value: 12950.564},
+    {name: 'Solomon Islands', value: 526.447},
+    {name: 'Sierra Leone', value: 5751.976},
+    {name: 'El Salvador', value: 6218.195},
+    {name: 'Somaliland', value: 9636.173},
+    {name: 'Somalia', value: 9636.173},
+    {name: 'Republic of Serbia', value: 3573.024},
+    {name: 'Suriname', value: 524.96},
+    {name: 'Slovakia', value: 5433.437},
+    {name: 'Slovenia', value: 2054.232},
+    {name: 'Sweden', value: 9382.297},
+    {name: 'Swaziland', value: 1193.148},
+    {name: 'Syria', value: 7830.534},
+    {name: 'Chad', value: 11720.781},
+    {name: 'Togo', value: 6306.014},
+    {name: 'Thailand', value: 66402.316},
+    {name: 'Tajikistan', value: 7627.326},
+    {name: 'Turkmenistan', value: 5041.995},
+    {name: 'East Timor', value: 10016.797},
+    {name: 'Trinidad and Tobago', value: 1328.095},
+    {name: 'Tunisia', value: 10631.83},
+    {name: 'Turkey', value: 72137.546},
+    {name: 'United Republic of Tanzania', value: 44973.33},
+    {name: 'Uganda', value: 33987.213},
+    {name: 'Ukraine', value: 46050.22},
+    {name: 'Uruguay', value: 3371.982},
+    {name: 'United States of America', value: 312247.116},
+    {name: 'Uzbekistan', value: 27769.27},
+    {name: 'Venezuela', value: 236.299},
+    {name: 'Vietnam', value: 89047.397},
+    {name: 'Vanuatu', value: 236.299},
+    {name: 'West Bank', value: 13.565},
+    {name: 'Yemen', value: 22763.008},
+    {name: 'South Africa', value: 51452.352},
+    {name: 'Zambia', value: 13216.985},
+    {name: 'Zimbabwe', value: 13076.978}
+  ];
+
+  let option = {
+    backgroundColor: new echarts.graphic.RadialGradient(0.5, 0.5, 0.4, [{
+      offset: 0,
+      color: '#4b5769'
+    }, {
+      offset: 1,
+      color: '#404a59'
+    }]),
+    tooltip: {
+      trigger: 'item',
+    },
+    title: {
+      text: 'Prices and Earnings 2012',
+      subtext: 'data from macrofocus',
+      sublink: 'https://www.macrofocus.com/public/products/infoscope/datasets/pricesandearnings/',
+      left: 'center',
+      top: 5,
+      itemGap: 0,
+      textStyle: {
+        color: '#eee'
+      },
+      z: 200
+    },
+    geo: {
+      map: 'world',
+      silent: false,
+      label: {
+        emphasis: {
+          show: false,
+          areaColor: '#eee'
+        }
+      },
+      itemStyle: {
+        normal: {
+          borderWidth: 0.2,
+          borderColor: '#404a59'
+        }
+      },
+      roam: true,
+      regions: coldata
+    },
+    series: [
+      {
+        name: 'Prices and Earnings 2012',
+        type: 'scatter',
+        coordinateSystem: 'geo',
+        symbolSize: 8,
+        data: makeMapData(rawData),
+        activeOpacity: 1,
+        label: {
+          normal: {
+            formatter: '{b}',
+            position: 'right',
+            show: false
+          },
+          emphasis: {
+            show: true
+          }
+        },
+        symbolSize: 10,
+        // symbolSize: function (data) {
+        //     return Math.max(5, data[2] / 5);
+        // },
+        itemStyle: {
+          normal: {
+            borderColor: '#fff',
+            color: '#577ceb',
+          }
+        },
+      },
+    ]
+  };
+
+
+  function color2rgb(color) {
+    var r = parseInt(color.substr(1, 2), 16);
+    var g = parseInt(color.substr(3, 2), 16);
+    var b = parseInt(color.substr(5, 2), 16);
+    return new Array(r, g, b);
+  }
+
+  function rgb2color(rgb) {
+    var s = "#";
+    for (var i = 0; i < 3; i++) {
+      var c = Math.round(rgb[i]).toString(16);
+      if (c.length == 1)
+        c = '0' + c;
+      s += c;
+    }
+    return s.toUpperCase();
+  }
+
+  var ColorA = "#87cefa", ColorB = "#ffff00", ColorC = "#ffa500";
+
+  function gradient() {
+    var str = coldata;
+    var result = "";
+    var Step = str.length - 1;
+    var Gradient = new Array(3);
+    var A = color2rgb(ColorA);
+    var B = color2rgb(ColorB);
+    var C = color2rgb(ColorC);
+    for (var N = 0; N <= Step; N++) {
+      if (coldata[N].value < 700000) {
+        for (var c = 0; c < 3; c++) // RGB通道分别进行计算
+        {
+          Gradient[c] = A[c] + (B[c] - A[c]) / 700000 * coldata[N].value;
+        }
+      }
+      else {
+        for (var c = 0; c < 3; c++) // RGB通道分别进行计算
+        {
+          Gradient[c] = B[c] + (C[c] - B[c]) / 700000 * (coldata[N].value - 700000);
+        }
+      }
+      coldata[N]["itemStyle"] = {
+        normal: {
+          areaColor: rgb2color(Gradient)
+        }
+      }
+      console.log(coldata)
+    }
+  };
+
+  function makeMapData(rawData) {
+    var mapData = [];
+    for (var i = 0; i < rawData.length; i++) {
+      var geoCoord = geoCoordMap[rawData[i][0]];
+      if (geoCoord) {
+        mapData.push({
+          name: rawData[i][0],
+          value: geoCoord.concat(rawData[i][1])
+        });
+      }
+    }
+    return mapData;
+  };
+  gradient();
+
+  // 初始化地图
+  var myChart = echarts.init(document.getElementById('map'))
+  // 获取地图的JSON数据
+  $.get('../json/world.json', function (res, req) {
+    // 注册地图
+    echarts.registerMap('world', res);
+    // 渲染地图
+    myChart.setOption(option);
+  })
+</script>
+</html>
