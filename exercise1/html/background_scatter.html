@@ -155,7 +155,7 @@
     ["Lyon", 81.8],
     ["Madrid", 83.6],
     ["Milan", 88.2],
-    ["Manama", 56.4]
+    ["Manama", 56.4],
     ["Manila", 19.2],
     ["Mexico City", 26.8],
     ["Miami", 106.2],
@@ -381,6 +381,9 @@
     }]),
     tooltip: {
       trigger: 'item',
+      formatter: function (params) {
+        console.log(params)
+      }
     },
     title: {
       text: 'Prices and Earnings 2012',
