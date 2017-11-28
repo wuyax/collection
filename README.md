@@ -11,6 +11,8 @@ small tool use for dev myself
 - echarts图表的联系测试 `mychart.html`
 - echarts中国地图的背景设置和visualMap的背景 联动取消选中的时候可以指定颜色 `chianMap.html`
 - echarts中国地图多个series 的时候toolTip 的正确处理方式，这里提供一种思路 `chinaMap-2series.html`
+- 浏览器种类，浏览器版本，平台 等信息检测 `browser_testing.html`
+
 # Learn Funtional Programming 文件夹
 对函数式编程充满了好奇，这里是一些测试用的demo，
 本测试都是基于 `underscore.js` 更多API参见[官方文档](http://underscorejs.org/) 当然你也可以查看中文文档版本有细微差别 [中文网站](http://www.bootcss.com/p/underscore/)
