@@ -68,7 +68,7 @@
   var vYear = d.getFullYear()
   var vMon = d.getMonth() + 1
   var vDay = d.getDate()
-  var Year_first = vYear + '-01-01';
+  var Year_first = vYear + '-11-01';
   var Year_last = vYear + '-' + (vMon > 10 ? vMon : '0' + vMon) + '-' + (vDay > 9 ? vDay : '0' + vDay)
   $('.form_date_start').attr('value', Year_first);
   $('.form_date_end').attr('value', Year_last);
@@ -90,16 +90,33 @@
     language: 'zh-CN',
     initialDate: new Date(),
   });
+
+  // 设置截止日期为当前日期
+  $('.form_date').datetimepicker('setEndDate', Year_last);
+
+  // $('.form_date_end').datetimepicker('setStartDate', Year_last)
+
+  var startTimeSec = Date.parse(Year_first)
+  var endTimeSec = Date.parse(Year_last)
+
+  console.log(startTimeSec, endTimeSec)
+
+
   // 获取开始时间
   $('.form_date_start')
     .datetimepicker()
     .on('changeDate', function (ev) {
+      if (Date.parse(ev.date) > endTimeSec) {
+        alert('不能比结束日期大')
+        return
+      }
       var y = new Date(ev.date.valueOf()).getFullYear();
       var m = new Date(ev.date.valueOf()).getMonth() + 1;
       var d = new Date(ev.date.valueOf()).getDate();
       dateRange.sYear = y;
       dateRange.sMonth = m;
       dateRange.sDay = d;
+      setStart(0 ,dateRange ,2)
     });
   // 获取结束时间
   $('.form_date_end')
@@ -111,6 +128,8 @@
       dateRange.eYear = y;
       dateRange.eMonth = m;
       dateRange.eDay = d;
+      setStart(1 ,dateRange ,2)
+
     });
   /* 日历插件js部分结束*/
 
@@ -119,9 +138,68 @@
   $('.tab-date').on("click", "li", function (e) {
     changeDate(this.dataset.neardate)
   })
-  function changeDate(range) {
+
+  /**
+   * 禁用日期选择
+   * @param where 0 开始日期 or 1 结束日期
+   * @param dateRange  obj
+   * @param view  视图
+   */
+  function setStart(where, dateRange, view) {
+    var startOrEnd = ['.form_date_end', '.form_date_start']
+    var dateStr = [
+      [dateRange.sYear, dateRange.sMonth, dateRange.sDay],
+      [dateRange.eYear, dateRange.eMonth, dateRange.eDay]
+    ]
+    var x= ['setStartDate','setEndDate']
+    if (view === 2) {
+      // 日视图
+      $(startOrEnd[where]).datetimepicker(x[where], dateStr[where].join('-'));
+    } else if (view === 3) {
+      // 月视图
+      $(startOrEnd[where]).attr(x[where], dateStr[where].slice(0, 3).join('-'));
+    } else if (view === 4 || view === 5) {
+      // 年视图 十年视图
+      $(startOrEnd[where]).attr(x[where], dateStr[where].slice(0, 2).join('-'));
+    }
+  }
+
+  /**
+   * 重置日期
+   * @param where 0 开始日期 or 1 结束日期
+   * @param dateRange  obj
+   * @param view  视图
+   */
+  function resetDate(where, dateRange, view) {
+    var startOrEnd = ['.form_date_start', '.form_date_end']
+    var dateStr = [
+      [dateRange.sYear, dateRange.sMonth, dateRange.sDay],
+      [dateRange.eYear, dateRange.eMonth, dateRange.eDay]
+    ]
+    if (view === 2) {
+      // 日视图
+      $(startOrEnd[where]).attr('value', dateStr[where].join('-'));
+    } else if (view === 3) {
+      // 月视图
+      $(startOrEnd[where]).attr('value', dateStr[where].slice(0, 3).join('-'));
+    } else if (view === 4 || view === 5) {
+      // 年视图 十年视图
+      $(startOrEnd[where]).attr('value', dateStr[where].slice(0, 2).join('-'));
+    }
+  }
+
+  /**
+   * 初始化日期使用
+   * @param range  day week month yaer decade
+   * @param dateRange obj 需要修改的对象
+   * @param startView 初始化视图
+   */
+  function changeDate(range, dateRange, startView) {
     // 本函数可以实现选择一天，一周，一月和一年，需要传递的参数为日期范围，
     // 保证dataRange对象在当前作用域中可以访问。
+    if (startView === undefined) {
+      startView = 2;
+    }
     //今天的时间
     var today = new Date();
     today.setTime(today.getTime());
@@ -130,6 +208,10 @@
     dateRange.eYear = today.getFullYear();
     dateRange.eMonth = today.getMonth() + 1;
     dateRange.eDay = today.getDate();
+
+    var sText = "";
+    var eText = "";
+
     // 点击切换
     if (range === "day") {
       //昨天的时间
@@ -138,8 +220,21 @@
       dateRange.sYear = yesterday.getFullYear();
       dateRange.sMonth = yesterday.getMonth() + 1;
       dateRange.sDay = yesterday.getDate();
-      $('.form_date_start').attr('value', dateRange.sYear + "-" + (dateRange.sMonth > 9 ? dateRange.sMonth : "0" + dateRange.sMonth) + "-" + (dateRange.sDay > 9 ? dateRange.sDay : "0" + dateRange.sDay));
-      $('.form_date_end').attr('value', dateRange.eYear + "-" + (dateRange.eMonth > 9 ? dateRange.eMonth : "0" + dateRange.eMonth) + "-" + (dateRange.eDay > 9 ? dateRange.eDay : "0" + dateRange.eDay));
+      if (startView == 2) {
+        // 天视图
+        sText = dateRange.sYear + "-" + (dateRange.sMonth > 9 ? dateRange.sMonth : "0" + dateRange.sMonth) + "-" + (dateRange.sDay > 9 ? dateRange.sDay : "0" + dateRange.sDay);
+        eText = dateRange.eYear + "-" + (dateRange.eMonth > 9 ? dateRange.eMonth : "0" + dateRange.eMonth) + "-" + (dateRange.eDay > 9 ? dateRange.eDay : "0" + dateRange.eDay);
+      } else if (startView == 3) {
+        // 月视图
+        sText = dateRange.sYear + "-" + (dateRange.sMonth > 9 ? dateRange.sMonth : "0" + dateRange.sMonth);
+        eText = dateRange.eYear + "-" + (dateRange.eMonth > 9 ? dateRange.eMonth : "0" + dateRange.eMonth);
+      } else if (startView == 4 || startView == 5) {
+        // 年视图
+        sText = dateRange.sYear;
+        eText = dateRange.eYear;
+      }
+      $('.form_date_start').val(sText);
+      $('.form_date_end').val(eText);
 
     } else if (range === "week") {
       //一星期前的时间
@@ -148,8 +243,21 @@
       dateRange.sYear = lastweek.getFullYear();
       dateRange.sMonth = lastweek.getMonth() + 1;
       dateRange.sDay = lastweek.getDate();
-      $('.form_date_start').attr('value', dateRange.sYear + "-" + (dateRange.sMonth > 9 ? dateRange.sMonth : "0" + dateRange.sMonth) + "-" + (dateRange.sDay > 9 ? dateRange.sDay : "0" + dateRange.sDay));
-      $('.form_date_end').attr('value', dateRange.eYear + "-" + (dateRange.eMonth > 9 ? dateRange.eMonth : "0" + dateRange.eMonth) + "-" + (dateRange.eDay > 9 ? dateRange.eDay : "0" + dateRange.eDay));
+      if (startView == 2) {
+        // 天视图
+        sText = dateRange.sYear + "-" + (dateRange.sMonth > 9 ? dateRange.sMonth : "0" + dateRange.sMonth) + "-" + (dateRange.sDay > 9 ? dateRange.sDay : "0" + dateRange.sDay);
+        eText = dateRange.eYear + "-" + (dateRange.eMonth > 9 ? dateRange.eMonth : "0" + dateRange.eMonth) + "-" + (dateRange.eDay > 9 ? dateRange.eDay : "0" + dateRange.eDay);
+      } else if (startView == 3) {
+        // 月视图
+        sText = dateRange.sYear + "-" + (dateRange.sMonth > 9 ? dateRange.sMonth : "0" + dateRange.sMonth);
+        eText = dateRange.eYear + "-" + (dateRange.eMonth > 9 ? dateRange.eMonth : "0" + dateRange.eMonth);
+      } else if (startView == 4 || startView == 5) {
+        // 年视图
+        sText = dateRange.sYear;
+        eText = dateRange.eYear;
+      }
+      $('.form_date_start').val(sText);
+      $('.form_date_end').val(eText);
     } else if (range === "month") {
       // 一个月前的时间
       var lastmonth = new Date();
@@ -157,8 +265,21 @@
       dateRange.sYear = lastmonth.getFullYear();
       dateRange.sMonth = lastmonth.getMonth() + 1;
       dateRange.sDay = lastmonth.getDate();
-      $('.form_date_start').attr('value', dateRange.sYear + "-" + (dateRange.sMonth > 9 ? dateRange.sMonth : "0" + dateRange.sMonth) + "-" + (dateRange.sDay > 9 ? dateRange.sDay : "0" + dateRange.sDay));
-      $('.form_date_end').attr('value', dateRange.eYear + "-" + (dateRange.eMonth > 9 ? dateRange.eMonth : "0" + dateRange.eMonth) + "-" + (dateRange.eDay > 9 ? dateRange.eDay : "0" + dateRange.eDay));
+      if (startView == 2) {
+        // 天视图
+        sText = dateRange.sYear + "-" + (dateRange.sMonth > 9 ? dateRange.sMonth : "0" + dateRange.sMonth) + "-" + (dateRange.sDay > 9 ? dateRange.sDay : "0" + dateRange.sDay);
+        eText = dateRange.eYear + "-" + (dateRange.eMonth > 9 ? dateRange.eMonth : "0" + dateRange.eMonth) + "-" + (dateRange.eDay > 9 ? dateRange.eDay : "0" + dateRange.eDay);
+      } else if (startView == 3) {
+        // 月视图
+        sText = dateRange.sYear + "-" + (dateRange.sMonth > 9 ? dateRange.sMonth : "0" + dateRange.sMonth);
+        eText = dateRange.eYear + "-" + (dateRange.eMonth > 9 ? dateRange.eMonth : "0" + dateRange.eMonth);
+      } else if (startView == 4 || startView == 5) {
+        // 年视图
+        sText = dateRange.sYear;
+        eText = dateRange.eYear;
+      }
+      $('.form_date_start').val(sText);
+      $('.form_date_end').val(eText);
     } else if (range === "year") {
       // 一年前的日期
       var lastyear = new Date();
@@ -166,9 +287,46 @@
       dateRange.sYear = lastyear.getFullYear();
       dateRange.sMonth = lastyear.getMonth() + 1;
       dateRange.sDay = lastyear.getDate();
-      $('.form_date_start').attr('value', dateRange.sYear + "-" + (dateRange.sMonth > 9 ? dateRange.sMonth : "0" + dateRange.sMonth) + "-" + (dateRange.sDay > 9 ? dateRange.sDay : "0" + dateRange.sDay));
-      $('.form_date_end').attr('value', dateRange.eYear + "-" + (dateRange.eMonth > 9 ? dateRange.eMonth : "0" + dateRange.eMonth) + "-" + (dateRange.eDay > 9 ? dateRange.eDay : "0" + dateRange.eDay));
+      if (startView == 2) {
+        // 天视图
+        sText = dateRange.sYear + "-" + (dateRange.sMonth > 9 ? dateRange.sMonth : "0" + dateRange.sMonth) + "-" + (dateRange.sDay > 9 ? dateRange.sDay : "0" + dateRange.sDay);
+        eText = dateRange.eYear + "-" + (dateRange.eMonth > 9 ? dateRange.eMonth : "0" + dateRange.eMonth) + "-" + (dateRange.eDay > 9 ? dateRange.eDay : "0" + dateRange.eDay);
+      } else if (startView == 3) {
+        // 月视图
+        sText = dateRange.sYear + "-" + (dateRange.sMonth > 9 ? dateRange.sMonth : "0" + dateRange.sMonth);
+        eText = dateRange.eYear + "-" + (dateRange.eMonth > 9 ? dateRange.eMonth : "0" + dateRange.eMonth);
+      } else if (startView == 4 || startView == 5) {
+        // 年视图
+        sText = dateRange.sYear;
+        eText = dateRange.eYear;
+      }
+      $('.form_date_start').val(sText);
+      $('.form_date_end').val(eText);
+    } else if (range === 'decade') {
+      // 十年前的日期
+      var decade = new Date();
+      decade.setFullYear(decade.getFullYear() - 10);
+      dateRange.sYear = decade.getFullYear();
+      dateRange.sMonth = decade.getMonth() + 1;
+      dateRange.sDay = decade.getDate();
+      if (startView == 2) {
+        // 天视图
+        sText = dateRange.sYear + "-" + (dateRange.sMonth > 9 ? dateRange.sMonth : "0" + dateRange.sMonth) + "-" + (dateRange.sDay > 9 ? dateRange.sDay : "0" + dateRange.sDay);
+        eText = dateRange.eYear + "-" + (dateRange.eMonth > 9 ? dateRange.eMonth : "0" + dateRange.eMonth) + "-" + (dateRange.eDay > 9 ? dateRange.eDay : "0" + dateRange.eDay);
+      } else if (startView == 3) {
+        // 月视图
+        sText = dateRange.sYear + "-" + (dateRange.sMonth > 9 ? dateRange.sMonth : "0" + dateRange.sMonth);
+        eText = dateRange.eYear + "-" + (dateRange.eMonth > 9 ? dateRange.eMonth : "0" + dateRange.eMonth);
+      } else if (startView == 4 || startView == 5) {
+        // 年视图
+        sText = dateRange.sYear;
+        eText = dateRange.eYear;
+      }
+      $('.form_date_start').val(sText);
+      $('.form_date_end').val(eText);
     }
   }
+
+
 </script>
 </html>
