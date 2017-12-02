@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
   <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+  <script type="text/javascript" src="js/layer.js"></script>
   <!--<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>-->
   <script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
   <script type="text/javascript" src="js/bootstrap-datetimepicker.zh-CN.js"></script>
@@ -94,29 +95,19 @@
   // 设置截止日期为当前日期
   $('.form_date').datetimepicker('setEndDate', Year_last);
 
-  // $('.form_date_end').datetimepicker('setStartDate', Year_last)
-
-  var startTimeSec = Date.parse(Year_first)
-  var endTimeSec = Date.parse(Year_last)
-
-  console.log(startTimeSec, endTimeSec)
-
-
   // 获取开始时间
   $('.form_date_start')
     .datetimepicker()
     .on('changeDate', function (ev) {
-      if (Date.parse(ev.date) > endTimeSec) {
-        alert('不能比结束日期大')
-        return
-      }
+      layer.msg('hahahah')
       var y = new Date(ev.date.valueOf()).getFullYear();
       var m = new Date(ev.date.valueOf()).getMonth() + 1;
       var d = new Date(ev.date.valueOf()).getDate();
       dateRange.sYear = y;
       dateRange.sMonth = m;
       dateRange.sDay = d;
-      setStart(0 ,dateRange ,2)
+      // 禁止结束时间的开始范围
+      disableDate(0, dateRange, 2)
     });
   // 获取结束时间
   $('.form_date_end')
@@ -128,10 +119,20 @@
       dateRange.eYear = y;
       dateRange.eMonth = m;
       dateRange.eDay = d;
-      setStart(1 ,dateRange ,2)
-
+      // 禁止开始时间的日期范围
+      disableDate(1, dateRange, 2)
     });
   /* 日历插件js部分结束*/
+
+  // 当日期禁用时点击时的提示文字
+  $('.datetimepicker').on('click', 'td', function (ev) {
+    if ($(this).hasClass('disabled')) {
+      layer.msg('日期不可用', {
+        offset: '50px',
+        time: 1000
+      })
+    }
+  })
 
 
   // 时间选择的切换
@@ -139,19 +140,33 @@
     changeDate(this.dataset.neardate)
   })
 
+  showAlert('最多只能选择10个')
+
+  /**
+   *  提示框显示
+   *  @msg String 需要显示的文字
+   */
+  function showAlert(msg) {
+    layer.alert(msg, {
+      icon: 2,
+      offset: '50px'
+    });
+  }
+
+
   /**
    * 禁用日期选择
    * @param where 0 开始日期 or 1 结束日期
    * @param dateRange  obj
    * @param view  视图
    */
-  function setStart(where, dateRange, view) {
+  function disableDate(where, dateRange, view) {
     var startOrEnd = ['.form_date_end', '.form_date_start']
     var dateStr = [
       [dateRange.sYear, dateRange.sMonth, dateRange.sDay],
       [dateRange.eYear, dateRange.eMonth, dateRange.eDay]
     ]
-    var x= ['setStartDate','setEndDate']
+    var x = ['setStartDate', 'setEndDate']
     if (view === 2) {
       // 日视图
       $(startOrEnd[where]).datetimepicker(x[where], dateStr[where].join('-'));
