@@ -95,11 +95,10 @@
   // 设置截止日期为当前日期
   $('.form_date').datetimepicker('setEndDate', Year_last);
 
-  // 获取开始时间
+  // 切换开始时间
   $('.form_date_start')
     .datetimepicker()
     .on('changeDate', function (ev) {
-      layer.msg('hahahah')
       var y = new Date(ev.date.valueOf()).getFullYear();
       var m = new Date(ev.date.valueOf()).getMonth() + 1;
       var d = new Date(ev.date.valueOf()).getDate();
@@ -109,7 +108,7 @@
       // 禁止结束时间的开始范围
       disableDate(0, dateRange, 2)
     });
-  // 获取结束时间
+  // 切换结束时间
   $('.form_date_end')
     .datetimepicker()
     .on('changeDate', function (ev) {
@@ -140,7 +139,7 @@
     changeDate(this.dataset.neardate)
   })
 
-  showAlert('最多只能选择10个')
+  showAlert('最多只能选择10个地区')
 
   /**
    *  提示框显示
@@ -148,8 +147,9 @@
    */
   function showAlert(msg) {
     layer.alert(msg, {
-      icon: 2,
-      offset: '50px'
+      title: '提示',
+      icon: 0,        // 警告图表
+      offset: '50px'  // 偏离屏幕顶部距离
     });
   }
 
