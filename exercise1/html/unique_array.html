@@ -31,6 +31,11 @@
   let arr = [1, 2, 3, 44, 54, 2, 22, 22, 422, 21, 22, 22, 12, 22, 12, 12, 12,]
 
   // 这种方法会破坏原来的数组
+  /**
+   * 数组去重
+   * @param arr {Array} 需要去重的数组
+   * @return {Array} 修改过后的数组
+   */
   function unique(arr) {
     for (let i = 0, len = arr.length; i < len; i++) {
       while (i !== arr.lastIndexOf(arr[i])) {
@@ -47,12 +52,16 @@
   console.log(unique(arr))
 
   // 这种方法生成一个新的数组
+  /**
+   * 数组去重
+   * @param arr  {Array} old arrary
+   * @returns {Array}
+   */
   function unique2(arr) {
     var newArr = []
     for (let i = 0, len = arr.length; i < len; i++) {
       for (let j = i + 1; j < len; j++) {
         // 如果重复，则i向前推进，但不管重复项
-        console.log(i, j)
         if (arr[i] == arr[j]) j = ++i
       }
       // 将没有重复项的推入到新数组
