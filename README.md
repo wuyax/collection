@@ -20,3 +20,6 @@ small tool use for dev myself
 ### 名词解释
 - 谓词(predicate)： "A predicate is a function that returns bool (or something that can be implicitly converted to bool). Predicates are widely used in the STL. The comparison functions for the standard associative containers are predicates, and predicate functions are commonly passed as parameters to algorithms like find_if and the various sorting algorithms."
 - 数据抽象: 
+
+### 新大陆
+- 据说lodash.js的性能不underscore.js 性能好，为什么不用lodash.js 呢？
