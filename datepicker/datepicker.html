@@ -25,29 +25,44 @@
     ul, ol {
       list-style: none;
     }
-
-    #outer {
-      width: 300px;
-      height: 300px;
-      display: none;
+    .wrapper {
+      width: 80%;
+      margin:0 auto;
+      padding: 100px 0 0;
+    }
+    .tab-date {
+      width: 500px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .tab-date li{
+      cursor: pointer;
+      background-color: deepskyblue;
+      width: 100px;
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
+    }
+    .tab-date li.active{
+      background-color: green;
+      color: #fff;
+    }
+    .tab-date li:hover {
+      background-color: green;
+      color: #fff;
     }
 
+    input {
+      width: 300px !important;
+      display: inline-block !important;
+    }
   </style>
 </head>
 
 <body>
-<div class="form-group">
-  <label for="dtp_input1" class="col-md-2 control-label">DateTime Picking</label>
-  <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z"
-       data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
-    <input class="form-control" size="16" type="text" value="" readonly>
-    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-  </div>
-  <input type="hidden" id="dtp_input1" value=""/><br/>
-</div>
-
-<div class="dataSelect">
+<div class="wrapper">
+  <div class="dataSelect">
   <p class="conT">查询周期：
   <ul class="tab-date">
     <li data-neardate="day" class="active">最近一天</li>
@@ -57,6 +72,8 @@
   </ul>
   <input size="16" type="text" class="form-control form_date form_date_start"/> 至：<input size="16" type="text"
                                                                                          class="form-control form_date form_date_end"/></p>
+
+</div>
 
 </div>
 
@@ -94,6 +111,8 @@
 
   // 设置截止日期为当前日期
   $('.form_date').datetimepicker('setEndDate', Year_last);
+  $('.form_date_start').datetimepicker('setStartDate', '1980-07-07');
+  $('.form_date_end').datetimepicker('setStartDate', Year_first);
 
   // 切换开始时间
   $('.form_date_start')
@@ -124,7 +143,8 @@
   /* 日历插件js部分结束*/
 
   // 当日期禁用时点击时的提示文字
-  $('.datetimepicker').on('click', 'td', function (ev) {
+  $('.datetimepicker').on('click', 'td, span', function (ev) {
+    console.log($(this))
     if ($(this).hasClass('disabled')) {
       layer.msg('日期不可用', {
         offset: '50px',
@@ -136,10 +156,17 @@
 
   // 时间选择的切换
   $('.tab-date').on("click", "li", function (e) {
-    changeDate(this.dataset.neardate)
+    // 重新初始化日期显示
+    changeDate(this.dataset.neardate, dateRange, 2)
+    // 重新调整被禁止的日期
+    $('.form_date_end').datetimepicker('setStartDate', $('.form_date_start')[0].value);
+    // 样式修改
+    $('.tab-date li').removeClass('active')
+    $(this).addClass('active')
   })
 
-  showAlert('最多只能选择10个地区')
+  // 这个方法用于地区选择的时候使用，现在暂时不使用
+  // showAlert('最多只能选择10个地区')
 
   /**
    *  提示框显示
