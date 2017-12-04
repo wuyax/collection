@@ -32,9 +32,25 @@
 </body>
 <script type="text/javascript" src="../js/fastdom.js"></script>
 <script type="text/javascript">
-    fastdom.measure(()=>{
-        let width = document.getElementById('box').clientHeight
-      console.log(width)
-    })
+  var start = null;
+  var element = document.getElementById('box');
+  element.style.position = 'absolute';
+
+  function step(timestamp) {
+    if (!start) start = timestamp;
+    var progress = timestamp - start;
+    element.style.left = Math.min(progress / 10, 200) + 'px';
+    if (progress < 5000) {
+      window.requestAnimationFrame(step);
+    }
+  }
+
+  // window.requestAnimationFrame(step);
+
+  fastdom.mutate((timestamp)=>{
+    element.style.left = 222 + 'px';
+  })
+
+
 </script>
 </html>
