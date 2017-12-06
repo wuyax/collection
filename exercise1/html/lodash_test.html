@@ -38,11 +38,21 @@
   console.log(_.shuffle(str));
 
 
-  var arr2 = ['a','b','a','b','a','b','a','b','a','b','a','b','a','b','a','b']
-  var x = _.groupBy(arr2,(v)=>{
-      return v==='a'
+  var arr2 = ['a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b']
+  var x = _.groupBy(arr2, (v) => {
+    return v === 'a'
   })
-console.log(x['true'])
+  console.log(x['true'])
 
+  var fun = function () {
+    return this
+  }
+  var a = {
+    name: 'x',
+    fun: fun
+  }
+  console.log(a.fun());   // a{}
+  var b = a.fun;
+  console.log(b())        //window
 </script>
 </html>
