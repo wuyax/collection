@@ -25,18 +25,21 @@
     ul, ol {
       list-style: none;
     }
+
     .wrapper {
       width: 80%;
-      margin:0 auto;
+      margin: 0 auto;
       padding: 100px 0 0;
     }
+
     .tab-date {
       width: 500px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .tab-date li{
+
+    .tab-date li {
       cursor: pointer;
       background-color: deepskyblue;
       width: 100px;
@@ -44,10 +47,12 @@
       line-height: 36px;
       text-align: center;
     }
-    .tab-date li.active{
+
+    .tab-date li.active {
       background-color: green;
       color: #fff;
     }
+
     .tab-date li:hover {
       background-color: green;
       color: #fff;
@@ -57,24 +62,32 @@
       width: 300px !important;
       display: inline-block !important;
     }
+
+    .btn {
+      background-color: green;
+      border-radius: 5px;
+      color: #fff;
+    }
   </style>
 </head>
 
 <body>
 <div class="wrapper">
   <div class="dataSelect">
-  <p class="conT">查询周期：
-  <ul class="tab-date">
-    <li data-neardate="day" class="active">最近一天</li>
-    <li data-neardate="week">最近一周</li>
-    <li data-neardate="month">最近一月</li>
-    <li data-neardate="year">最近一年</li>
-  </ul>
-  <input size="16" type="text" class="form-control form_date form_date_start"/> 至：<input size="16" type="text"
-                                                                                         class="form-control form_date form_date_end"/></p>
+    <p class="conT">查询周期：
+    <ul class="tab-date">
+      <li data-neardate="day" class="active">最近一天</li>
+      <li data-neardate="week">最近一周</li>
+      <li data-neardate="month">最近一月</li>
+      <li data-neardate="year">最近一年</li>
+    </ul>
+    <input size="16" type="text" class="form-control form_date form_date_start"/> 至：<input size="16" type="text"
+                                                                                           class="form-control form_date form_date_end"/></p>
 
-</div>
-
+  </div>
+  <div>
+    <button class="btn">确认</button>
+  </div>
 </div>
 
 
@@ -165,8 +178,9 @@
     $(this).addClass('active')
   })
 
+
   // 这个方法用于地区选择的时候使用，现在暂时不使用
-  showAlert('最多只能选择10个地区')
+  // showAlert('最多只能选择10个地区')
 
   /**
    *  提示框显示
@@ -181,6 +195,52 @@
     });
   }
 
+  $('.btn').on('click', function (ev) {
+    showConfirm('北京', dosomething, {name: 'zhang'})
+  })
+
+  showConfirm('北京', dosomething, {name: 'zhang'})
+
+  /**
+   * 定义删除的方法
+   * @param params Object 可选的参数用于请求
+   */
+  function dosomething(params) {
+    $.ajax({
+      url: "http://192.168.15.213:8888/apple/income/getTime",
+      type: 'get',
+      data: params,
+      contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+      success: function (data) {
+        console.log(data)
+        layer.msg('删除成功', {icon: 1});
+      },
+      error: function (e) {
+        console.log(e)
+        layer.msg('删除失败', {icon: 2});
+      }
+    });
+  }
+
+  /**
+   * 确认删除提示
+   * @param msg String 需要显示在提示框中的信息 如地区名
+   * @param del Function 删除操作的回调函数
+   * @param [params] Object 可选的参数，作为请求的参数
+   */
+  function showConfirm(msg, del, params) {
+    layer.confirm('确认删除' + msg + '?', {
+        btn: ['确认', '取消'], //按钮
+        icon: 3
+      },
+      function () {
+        del(params);
+      },
+      function () {
+        console.log('取消删除')
+      }
+    );
+  }
 
   /**
    * 禁用日期选择
