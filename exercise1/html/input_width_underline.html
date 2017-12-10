@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>input width underline</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    img {
+      vertical-align: middle;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    body {
+      background-color: #222222;
+      color: white;
+    }
+
+    .input {
+      font-size: 2em;
+      max-width: calc(100vw - 12px)
+    }
+    .input::after {
+      content: '';
+      position: relative;
+      display: block;
+      border-bottom: 3px solid #333333;
+      top: -3px;
+      isolation: isolate;
+    }
+    .inner {
+      position: relative;
+      display: inline-block;
+      padding: .5em 0;
+      border-bottom: 3px solid white;
+      z-index: 1;
+      font-family: Roboto Slab, sans-serif;
+    }
+    .inner:focus {
+      border-color: #fbc91b;
+    }
+    .inner:empty {
+      border-color: transparent;
+      width: 100%;
+    }
+    .inner:empty::before {
+      content: attr(placeholder);
+      cursor: text;
+      color: #757575;
+    }
+
+    .inner:focus {
+      outline: 0;
+    }
+  </style>
+</head>
+
+<body>
+<!--在网上看到一个效果，文本输入的时候下划线的颜色自动更新-->
+<!--这是一个纯粹的css实现的方式，原文中是一个使用JS实现的方式-->
+<!--这个实现方式用到了很多新的html和CSS的新特性-->
+<!--url: https://medium.freecodecamp.org/text-input-highlight-tripadvisor-style-2a44477de1b2-->
+<div class="input">
+  <div class="inner" contenteditable=true placeholder="Search..."></div>
+</div>
+</body>
+</html>
