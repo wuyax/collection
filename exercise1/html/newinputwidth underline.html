@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>new input width underline</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    img {
+      vertical-align: middle;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+    .wrapper {
+      width: 500px;
+      height: 300px;
+      margin: 100px auto;
+      background-color: #222;
+    }
+    .inner {
+      font-size: 20px;
+      color: #fff;
+      width: calc(100% - 60px);
+      height: 40px;
+      border: none;
+      outline: none;
+      /*caret-color: #fff;*/
+      margin: 30px;
+      background-color: #222;
+      border-bottom :#444 3px solid;
+      /*border-bottom :#fbc91b 3px solid;*/
+
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrapper">
+  <input type="text" class="inner" placeholder="Search...">
+</div>
+</body>
+</html>
