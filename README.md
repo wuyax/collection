@@ -13,6 +13,12 @@ small tool use for dev myself
 - echarts中国地图多个series 的时候toolTip 的正确处理方式，这里提供一种思路 `chinaMap-2series.html`
 - 浏览器种类，浏览器版本，平台 等信息检测 `browser_testing.html`
 - 新增了一个达夫设备的测试，这个循环在测试中并没有比普通的for循环快，具体可以参考别人的测试demo ` duffsdevice.html`
+# Grid_Layout 文件夹
+这里是一些css grid 测是和练习的demo
+* 这里的图片来自于 Unsplash *
+- 一个简单的demo 帮组理解 css grid 的基本语法。
+- image 图片的自适应布局 `grid_img.html`
+
 # Learn Funtional Programming 文件夹
 对函数式编程充满了好奇，这里是一些测试用的demo，
 本测试都是基于 `underscore.js` 更多API参见[官方文档](http://underscorejs.org/) 当然你也可以查看中文文档版本有细微差别 [中文网站](http://www.bootcss.com/p/underscore/)
