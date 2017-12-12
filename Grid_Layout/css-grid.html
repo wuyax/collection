@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <link rel="stylesheet" href="css/index.css">
   <title>css-grid</title>
   <style type="text/css">
     * {
@@ -18,12 +19,7 @@
     ul, ol {
       list-style: none;
     }
-
-    body {
-      padding: 50px;
-    }
     .wrapper {
-      display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       grid-template-rows: repeat(3,100px);
       grid-column-gap: 10px;
@@ -76,6 +72,7 @@
 </head>
 
 <body>
+
 <div class="wrapper">
   <div class="box a">
     <div class="suba a-1">A-1</div>
