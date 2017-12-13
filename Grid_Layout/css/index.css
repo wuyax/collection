@@ -18,7 +18,9 @@ html, body {
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   grid-template-rows: repeat(2, 300px);
 }
-
+.itm {
+  background-color: #F17C67;
+}
 .item > img {
   width: 100%;
   height: 100%;

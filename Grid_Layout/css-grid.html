@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-  <link rel="stylesheet" href="css/index.css">
   <title>css-grid</title>
   <style type="text/css">
     * {
@@ -19,9 +18,15 @@
     ul, ol {
       list-style: none;
     }
+
+    body {
+      padding: 50px;
+    }
+
     .wrapper {
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      grid-template-rows: repeat(3,100px);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-rows: repeat(3, 100px);
       grid-column-gap: 10px;
       grid-row-gap: 10px;
       grid-auto-rows: minmax(100px, auto);
@@ -55,12 +60,14 @@
     .a-1 {
       z-index: 1;
     }
+
     .d {
       grid-column-start: 3;
       grid-column-end: 5;
       grid-row-start: 2;
       grid-row-end: 4;
     }
+
     .f {
       grid-column-start: 2;
       grid-column-end: 3;
@@ -68,33 +75,60 @@
       grid-row-end: 4;
       z-index: -1;
     }
+
+    /*.g {
+      grid-column: 7/8;
+      grid-row: 1/2;
+    }
+
+    .h {
+      grid-column: 6/7;
+      grid-row: 1/2;
+    }*/
+    .next {
+
+      background-color: rebeccapurple;
+    }
+    .xxx {
+      background-color: yellowgreen;
+    }
+    .child {
+      width: 200px;
+      height: 200px;
+      background-color: bisque;
+      position: absolute;
+    }
   </style>
 </head>
 
 <body>
-
-<div class="wrapper">
-  <div class="box a">
-    <div class="suba a-1">A-1</div>
-    <div class="suba a-2">A-2</div>
-    <div class="suba a-3">A-3</div>
-    <div class="suba a-4">A-4</div>
-    <div class="suba a-5">A-5</div>
-    <div class="suba a-6">A-6</div>
+<div class="xxx">
+  <div class="wrapper">
+    <div class="box a">
+      <div class="suba a-1">A-1</div>
+      <div class="suba a-2">A-2</div>
+      <div class="suba a-3">A-3</div>
+      <div class="suba a-4">A-4</div>
+      <div class="suba a-5">A-5</div>
+      <div class="suba a-6">A-6</div>
+    </div>
+    <div class="box b">B</div>
+    <div class="box c">C</div>
+    <div class="box d">D</div>
+    <div class="box e">E</div>
+    <div class="box f">F</div>
+    <div class="box g">G</div>
+    <div class="box h">H</div>
+    <div class="box i">I</div>
+    <div class="box j">J</div>
+    <div class="box k">K</div>
+    <div class="box l">L</div>
+    <div class="box m">M</div>
+    <div class="box n">N</div>
   </div>
-  <div class="box b">B</div>
-  <div class="box c">C</div>
-  <div class="box d">D</div>
-  <div class="box e">E</div>
-  <div class="box f">F</div>
-  <div class="box g">G</div>
-  <div class="box h">H</div>
-  <div class="box i">I</div>
-  <div class="box j">J</div>
-  <div class="box k">K</div>
-  <div class="box l">L</div>
-  <div class="box m">M</div>
-  <div class="box n">N</div>
+</div>
+<div class="next">
+  <div class="child"></div>
 </div>
 </body>
 </html>

@@ -63,6 +63,9 @@
       display: inline-block !important;
     }
 
+    input:hover {
+      cursor: pointer !important;
+    }
     .btn {
       background-color: green;
       border-radius: 5px;
@@ -81,7 +84,7 @@
       <li data-neardate="month">最近一月</li>
       <li data-neardate="year">最近一年</li>
     </ul>
-    <input size="16" type="text" class="form-control form_date form_date_start"/> 至：<input size="16" type="text"
+    <input size="16" type="text" class="form-control form_date form_date_start" /> 至：<input size="16" type="text"
                                                                                            class="form-control form_date form_date_end"/></p>
 
   </div>
@@ -93,6 +96,7 @@
 
 </body>
 <script type="text/javascript">
+  $('.form-control').prop('readonly', 'readonly')
   /* 日历插件js部分开始--精确到天*/
   // 初始化日期显示
   var d = new Date()
@@ -140,6 +144,7 @@
       dateRange.sDay = d;
       // 禁止结束时间的开始范围
       disableDate(0, dateRange, 2)
+      console.log(ev.date)
     });
   // 切换结束时间
   $('.form_date_end')
@@ -427,6 +432,15 @@
       $('.form_date_end').val(eText);
     }
   }
+
+
+  // 输入框内容发生改变的时候
+  $('.dataSelect').on('change','input',function (ev) {
+    var startTime = $('.form_date_start').val()
+    var endTime = $('.form_date_end').val()
+    // do something
+    console.log(ev)
+  })
 
 
 </script>
