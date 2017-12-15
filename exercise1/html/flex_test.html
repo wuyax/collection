@@ -16,41 +16,40 @@
     ul, ol {
       list-style: none;
     }
-
-    .box1 {
-      width: 294px;
-      height: 25px;
-      font-size: 14px;
+    .wrapper {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
+      height: 150px;
+      width: 200px;
+      border: 4px solid green;
+      margin-bottom: 20px;
     }
 
-    .box2 {
-      width: 45%;
-    }
-
-    .box3 {
-      width: 55%;
+    .column-parent {
+      flex: 1 0 0;
       display: flex;
-      font-size: 14px;
-      align-items: center;
+      flex-direction: column;
+      border: 2px solid blue;
     }
 
-    .box3 li {
-      padding: 0 5px;
+    .column-child {
+      flex: 0 0 100%;
+      border: 2px solid red;
     }
   </style>
 </head>
 
 <body>
-<div class="box1" id="box">
-  <div class="box2">2016全国鲜苹果进口总量300万吨</div>
-  <ul class="box3">
-    <li>鲜苹果</li>
-    <li>苹果干</li>
-    <li>苹果汁</li>
-  </ul>
+<div class="wrapper">
+  <p>Some content of unknown size</p>
+  <div class="column-parent">
+    <div class="column-child">
+      Should be inside green
+    </div>
+    <div class="column-child">
+      Should be outside green
+    </div>
+  </div>
 </div>
 <script type="text/javascript" src="../js/echarts.min.js"></script>
 <script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
