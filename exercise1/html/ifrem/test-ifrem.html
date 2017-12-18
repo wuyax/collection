@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>test ifrem</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    img {
+      vertical-align: middle;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+    .wrapper {
+      color: #fff;
+      width: 80%;
+      margin: 0 auto;
+    }
+    .wrapper:after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+    .active {
+      background-color: #444;
+    }
+    .header {
+      width: 100%;
+      height: 50px;
+      background-color: #aaa;
+      padding-left: 300px;
+      box-sizing: border-box;
+    }
+    .header li {
+      margin: 0 10px 0 0;
+      width: 100px;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      cursor: pointer;
+      background-color: #555;
+      float: left;
+    }
+    .leftnav {
+      width: 300px;
+      height: 700px;
+      background-color: #aaa;
+      float: left;
+    }
+    .leftnav li {
+      width: 100%;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .leftnav li:hover {
+      background-color: #555;
+    }
+    .container {
+      width: calc(100% - 300px);
+      height: 700px;
+      float: left;
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrapper">
+  <div class="header">
+    <ul>
+      <li>i1</li>
+      <li>i2</li>
+      <li>i3</li>
+    </ul>
+  </div>
+  <div class="leftnav">
+    <ul>
+      <li class="active">北京</li>
+      <li>上海</li>
+      <li>广州</li>
+    </ul>
+  </div>
+  <div class="container">
+    <iframe src="ifrem-sub1.html" frameborder="0" height="100%" width="100%">
+
+    </iframe>
+  </div>
+</div>
+</body>
+<script type="text/javascript" src="../../js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+    $('.leftnav ul').on('click','li',function (ev) {
+      $('.leftnav ul li').removeClass('active')
+      $(this).addClass('active')
+      if($(this).context.innerHTML === '北京'){
+          $('iframe')[0].src = 'ifrem-sub1.html'
+      } else if($(this).context.innerHTML === '上海') {
+        $('iframe')[0].src = 'ifrem-sub2.html'
+      } else if($(this).context.innerHTML === '广州'){
+        $('iframe')[0].src = 'ifrem-sub3.html'
+      }
+    })
+</script>
+</html>
