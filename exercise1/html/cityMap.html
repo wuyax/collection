@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
+  <script type="text/javascript" src="../js/echarts.min.js"></script>
+  <title>市级地图</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    img {
+      vertical-align: middle;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: #787D7B;
+    }
+
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+<div id="map"></div>
+</body>
+<script type="text/javascript">
+  var mapData = [
+    {
+      "name": "贵溪市",
+      "id": "500000",
+      "value": 8.24
+    },
+    {
+      "name": "月湖区",
+      "id": "430000",
+      "value": 4.72
+    },
+    {
+      "name": "余江县",
+      "id": "510000",
+      "value": 6.19
+    }
+  ]
+
+  // 初始化地图
+  var myChart = echarts.init(document.getElementById('map'))
+  var option = {
+    tooltip: {
+      trigger: 'item',
+      backgroundColor: '#159847',
+      formatter: function (params) {
+        let values = params.value;
+        if (!values) {
+          return;
+        } else {
+          let str = "鲜苹果批发价格<br>";
+          str += params.name + '：<b style="color:#ffa600;font-weight: bold;font-size:18px;">' + params.value + "</b>元/公斤" + "<br>";
+          return str
+        }
+
+      }
+    },
+    visualMap: [
+      {
+        type: 'piecewise', //分段型。
+        splitNumber: 6,
+        inverse: false,
+        seriesIndex: 0,
+        pieces: [{
+          min: 9,
+        }, {
+          min: 8,
+          max: 9,
+        }, {
+          min: 7,
+          max: 8,
+        }, {
+          min: 6,
+          max: 7,
+        }, {
+          min: 5,
+          max: 6,
+        }, {
+          min: 3,
+          max: 5,
+        }],
+        left: '4%',
+        bottom: '6%',
+        itemGap: 0,
+        itemWidth: 20,
+        itemHeight: 30,
+        /**
+         * 这一个图片的作用是，当我们通过点击visualMap
+         * 联动开关数据选择范围的时候地图还保留原有的背景颜色，
+         * 实现原理就是下面个配置项
+         * outOfRange: {color: '#fff'},
+         */
+        // 下面这两个配置项是这个demo的主要代码
+        inRange: {
+          symbol: 'rect',
+          color: ['#f2f7b3', '#c9f573', '#59da3b', '#27bf42', '#159847', '#187242']
+        },
+        // 关键所在
+        outOfRange: {
+          color: '#fff'
+        },
+        textStyle: {
+          color: '#fff'
+        }
+      },],
+    series: [
+      {
+        name: '苹果平均价格',
+        type: 'map',
+        map: '360600',
+        zoom: '1.2',
+        left: '20%',
+        roam: true,
+        silent: false,
+        label: {
+          normal: {
+            show: true
+          },
+          emphasis: {
+            show: false
+          }
+        },
+        roam: true,
+        itemStyle: {
+          normal: {
+            areaColor: '#fff',
+            borderColor: '#20508a'
+          },
+          emphasis: {
+            areaColor: '#3952ca'
+          }
+        },
+        data: mapData
+      },
+    ]
+  };
+
+  // 获取地图的JSON数据
+  $.get('../json/mapdata/geometryCouties/360600.json', function (res, req) {
+    // 注册地图
+    echarts.registerMap('360600', res);
+    // 渲染地图
+    myChart.setOption(option);
+  })
+
+</script>
+</html>
