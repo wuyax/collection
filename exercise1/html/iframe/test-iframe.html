@@ -72,6 +72,13 @@
       width: calc(100% - 300px);
       height: 700px;
       float: left;
+      overflow: hidden;
+      position: relative;
+    }
+    iframe {
+      position: absolute;
+      top: -50px;
+      left: -100px;
     }
   </style>
 </head>
@@ -105,9 +112,9 @@
       $('.leftnav ul li').removeClass('active')
       $(this).addClass('active')
       if($(this).context.innerHTML === '北京'){
-          $('iframe')[0].src = 'iframe-sub1.html'
+          $('iframe')[0].src = 'http://202.106.10.250:8877/#/product'
       } else if($(this).context.innerHTML === '上海') {
-        $('iframe')[0].src = 'iframe-sub2.html'
+        $('iframe')[0].src = 'https://css-tricks.com/?s=images&is_v=1'
       } else if($(this).context.innerHTML === '广州'){
         $('iframe')[0].src = 'iframe-sub3.html'
       }

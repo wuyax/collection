@@ -157,10 +157,15 @@
   // 获取地图的JSON数据
   $.get('../json/mapdata/geometryCouties/360600.json', function (res, req) {
     // 注册地图
+    //console.log(echarts)
     echarts.registerMap('360600', res);
     // 渲染地图
     myChart.setOption(option);
   })
+
+  var str = '{[111111]}{[233e4]}'
+  var substr = str.replace('}{','},{').split(',')
+  // console.log(typeof JSON.parse(substr))
 
 </script>
 </html>
