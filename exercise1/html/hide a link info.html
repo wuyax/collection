@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>hide a link info</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    img {
+      vertical-align: middle;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+    .alink:hover {
+      cursor: pointer;
+    }
+  </style>
+
+</head>
+
+<body>
+<!--鼠标悬浮的时候可以看到链接的提示信息，这对于用户体验很有用-->
+<a href="http://www.baidu.com">baidu.com</a>
+<!--鼠标悬浮的时候不可以看到链接的提示信息，这在全屏展示的时候会有用-->
+<div id="alink" class="alink">baidu.com</div>
+</body>
+<script type="text/javascript">
+  var alink = document.getElementById('alink')
+  alink.addEventListener('click',()=>{
+    window.location.href = 'http://www.baidu.com'
+  })
+</script>
+</html>
