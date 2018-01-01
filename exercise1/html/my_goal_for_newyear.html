@@ -23,16 +23,17 @@
 
 <body>
 <div id="myGoal" class="mygoal">My goal for 2018 is to accomplish the goals of 2017 which I should have done in 2016
-  because I made a promise in 2015 & planned in 2014
+  because I made a promise in 2015 & planned in 2014.
 </div>
 <div id="newGoal"></div>
 <button id="nextYear">next year</button>
 </body>
 <script type="text/javascript">
-  function nextYear() {
-    var myGoal = document.getElementById('myGoal').innerText
-    var reg = /\d{4}/g
-    var newGoal = myGoal.replace(reg, function (x, y, z) {
+  var myGoal = document.getElementById('myGoal').innerText
+
+  function nextYear(oldGoal) {
+    let reg = /\d{4}/g
+    let newGoal = oldGoal.replace(reg, (x) => {
       return x - 0 + 1
     })
     return newGoal
@@ -41,7 +42,7 @@
   var btn = document.getElementById('nextYear')
   btn.addEventListener('click', function (ev) {
     var target = document.getElementById('newGoal')
-    target.textContent = nextYear()
+    target.textContent = nextYear(myGoal)
   })
 
 </script>
