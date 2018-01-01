@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>my goal for new year</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    img {
+      vertical-align: middle;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+  </style>
+</head>
+
+<body>
+<div id="myGoal" class="mygoal">My goal for 2018 is to accomplish the goals of 2017 which I should have done in 2016
+  because I made a promise in 2015 & planned in 2014
+</div>
+<div id="newGoal"></div>
+<button id="nextYear">next year</button>
+</body>
+<script type="text/javascript">
+  function nextYear() {
+    var myGoal = document.getElementById('myGoal').innerText
+    var reg = /\d{4}/g
+    var newGoal = myGoal.replace(reg, function (x, y, z) {
+      return x - 0 + 1
+    })
+    return newGoal
+  }
+
+  var btn = document.getElementById('nextYear')
+  btn.addEventListener('click', function (ev) {
+    var target = document.getElementById('newGoal')
+    target.textContent = nextYear()
+  })
+
+</script>
+</html>
