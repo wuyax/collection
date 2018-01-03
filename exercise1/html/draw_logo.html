@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>draw logo</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    img {
+      vertical-align: middle;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    body {
+      background-color: #888888;
+    }
+
+    .logo-box {
+      width: 500px;
+      height: 500px;
+    }
+  </style>
+</head>
+
+<body>
+<div id="logobox" class="logo-box">
+  <canvas id="logo" width="500" height="500"></canvas>
+</div>
+</body>
+<script type="text/javascript">
+  drawLogo('logobox', 'logo')
+
+  function drawLogo(dom, id) {
+    var _dom = document.getElementById(dom)
+    var _width = _dom.offsetWidth
+    var _height = _dom.offsetHeight
+    var _can = document.getElementById(id)
+    // _can.style.width = _width + 'px'
+    // _can.style.height = _height + 'px'
+    var canvas = document.getElementById(id);
+    if (canvas.getContext) {
+      var ctx = canvas.getContext('2d');
+      // drawing code here
+      ctx.arc(_width/2,_height/2,_width/2-2,0,Math.PI*2,true); // 绘制
+      ctx.fillStyle= '#ffffff'
+      ctx.fill()
+      ctx.arc(_width/2,_height/2,_width/2*0.545-2,0,Math.PI*2,true)
+      ctx.fillStyle= '#fcc800'
+      ctx.fill("evenodd");
+    } else {
+      // canvas-unsupported code here
+      console.warn('your browser unsupported')
+    }
+  }
+</script>
+</html>
