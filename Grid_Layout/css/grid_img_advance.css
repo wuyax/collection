@@ -8,32 +8,38 @@ html, body {
 
 .wrapper {
   width: 80%;
-  /*height: calc(100% - 100px);*/
   margin: 50px auto;
 }
 
 .container {
   display: grid;
-  grid-gap: 10px;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  /*grid-template-rows: repeat(2, 300px);*/
+  /*不确定会有多少行*/
   grid-auto-rows: 200px;
+  grid-gap: 10px;
   grid-auto-flow: dense;
 }
-.itm {
+
+.item {
   background-color: #F17C67;
 }
+
 .item > img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
 .vertical {
+  /*表示占2行*/
   grid-row: span 2;
 }
+
 .horizontal {
+  /*表示占2列*/
   grid-column: span 2;
 }
+
 .big {
   grid-column: span 2;
   grid-row: span 2;

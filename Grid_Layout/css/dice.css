@@ -1,8 +1,8 @@
 html, body {
   width: 100%;
   height: 100%;
-  background-color: #aaa;
   padding-top: 1px;
+  background-color: #aaa;
   box-sizing: border-box;
 }
 
@@ -13,40 +13,52 @@ html, body {
 
 .container {
   display: grid;
-  grid-gap: 10px;
   grid-template-columns: repeat(3, 300px);
   grid-template-rows: repeat(3, 300px);
+  grid-gap: 10px;
 }
+
 .item {
   display: grid;
   grid-template-columns: repeat(3, 100px);
   grid-template-rows: repeat(3, 100px);
-  background-color: #666;
   justify-items: center;
   align-items: center;
   border-radius: 5px;
+  background-color: #666;
 }
+
 .circle {
-  background-color: #fff;
   width: 60%;
   height: 60%;
   border-radius: 50% 50%;
+  background-color: #fff;
 }
+
+.circle:hover {
+  background-color: #678900;
+}
+
 .p1, .p2, .p3 {
   grid-row: 1/2;
 }
+
 .p4, .p5, .p6 {
   grid-row: 2/3;
 }
+
 .p7, .p8, .p9 {
   grid-row: 3/4;
 }
+
 .p1, .p4, .p7 {
   grid-column: 1/2;
 }
+
 .p2, .p5, .p8 {
   grid-column: 2/3;
 }
+
 .p3, .p6, .p9 {
   grid-column: 3/4;
 }

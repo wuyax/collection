@@ -18,44 +18,52 @@
     ul, ol {
       list-style: none;
     }
+
     .wrapper {
       width: 80%;
       margin: 50px auto;
     }
+
+    /**
+     * https://www.w3.org/TR/css3-grid-layout/#auto-repeat
+     * 共同点：
+     *   他们都会给出一个重复次数的数值
+     * 区别：
+     *   auto-fill will create tracks even if there's no grid item to fill it up.
+     *   auto-fit will not do this. It will collapsed empty tracks to zero.
+     */
+
     .container {
       display: grid;
-      /*
-      * https://www.w3.org/TR/css3-grid-layout/#auto-repeat
-      * 共同点：
-      *   他们都会给出一个重复次数的数值
-      * 区别：
-      *   auto-fill will create tracks even if there's no grid item to fill it up.
-      *   auto-fit will not do this. It will collapsed empty tracks to zero.
-      */
-
       /*grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));*/
       grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
       grid-template-rows: 100px 100px;
       grid-gap: 10px;
     }
+
     .item {
       color: #fff;
-      background-color: #444;
       line-height: 100px;
       text-align: center;
+      background-color: #444;
     }
+
     .a {
       background-color: #622954;
     }
+
     .b {
       background-color: #6D2E5B;
     }
+
     .c {
       background-color: #C1328E;
     }
+
     .d {
       background-color: #A8497A;
     }
+
     .e {
       background-color: #E03C8A;
     }
