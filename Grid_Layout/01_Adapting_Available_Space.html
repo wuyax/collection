@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <link rel="stylesheet" href="css/index.css">
+  <title>Adapting Layouts to Available Space</title>
+  <style type="text/css">
+    .container {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto 1fr auto;
+      height: 300px;
+    }
+
+    .title {
+      grid-column: 1/2;
+      grid-row: 1/2;
+    }
+
+    .score {
+      grid-column: 1;
+      grid-row: 3;
+    }
+
+    .stats {
+      grid-column: 1;
+      grid-row: 2;
+      align-self: start;
+    }
+
+    .board {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      /*background-color: #fff;*/
+    }
+
+    .controls {
+      grid-column: 2;
+      grid-row: 3;
+      justify-self: center;
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrapper">
+  <div class="container">
+    <div class="title">Game Title</div>
+    <div class="score">Score</div>
+    <div class="stats">Stats</div>
+    <div class="board">Board</div>
+    <div class="controls">Controls</div>
+  </div>
+</div>
+</body>
+</html>

@@ -28,7 +28,7 @@
 </p>
 </body>
 <script type="text/javascript">
-  let arr = [1, 2, 3, 44, 54, 2, 22, 22, 422, 21, 22, 22, 12, 22, 12, 12, 12,]
+  let arr = [1, 2, 3, 44, 54, 2, '22', 22, 422, 21, 22, 22, 12, 22, 12, 12, 12,]
 
   // 这种方法会破坏原来的数组
   /**
@@ -62,7 +62,7 @@
     for (let i = 0, len = arr.length; i < len; i++) {
       for (let j = i + 1; j < len; j++) {
         // 如果重复，则i向前推进，但不管重复项
-        if (arr[i] == arr[j]) j = ++i
+        if (arr[i] === arr[j]) j = ++i
       }
       // 将没有重复项的推入到新数组
       newArr.push(arr[i])
@@ -70,7 +70,7 @@
     return newArr
   }
 
-  document.getElementsByClassName('new-arr')[0].innerHTML = unique(arr).toString()
+  document.getElementsByClassName('new-arr')[0].innerHTML = unique2(arr).toString()
   //console.log(unique2(arr));
 </script>
 </html>
