@@ -52,8 +52,23 @@
       function trim2(str) {
         return str.replace(/^\s+|\s+$/g, '')
       }
-      console.log(trim2(str))
-      console.log(str)
-      console.log(maxInNumbers(numbers),minInNumbers(numbers))
+
+      /**
+       * 复制一个数组
+       * @param arr
+       * @return {Array|*|T[]|string}
+       */
+      function copyArr(arr) {
+        return arr.concat()
+      }
+
+
+      let newa = copyArr(numbers)
+      newa[1]= 100
+      console.log(newa)
+      console.log(numbers)
+      // console.log(trim2(str))
+      // console.log(str)
+      // console.log(maxInNumbers(numbers),minInNumbers(numbers))
   </script>
 </html>
