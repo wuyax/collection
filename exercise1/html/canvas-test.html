@@ -42,7 +42,7 @@
       height: 600px;
       margin: 100px auto;
       background: url("../source/bg_01.jpg") no-repeat center;
-      background-size: cover;
+      /*background-size: cover;*/
       position: relative;
       z-index: -1;
     }
@@ -94,21 +94,22 @@
 
     // 父元素DOM
     let parDom = document.getElementById(parId)
-    let canvas = document.getElementById(canID);
-    var ctx = canvas.getContext('2d');
-
+    let canvas = document.getElementById(canID)
+    var ctx = canvas.getContext('2d')
+    // 设置父元素的背景图片的样式
+    parDom.style.backgroundSize = 'cover'
     // 得到父元素的CSS参数 兼容处理
     if (window.getComputedStyle) {
-      var parDomW = parseFloat(window.getComputedStyle(parDom, null).width);
-      var parDomH = parseFloat(window.getComputedStyle(parDom, null).height);
+      var parDomW = parseFloat(window.getComputedStyle(parDom, null).width)
+      var parDomH = parseFloat(window.getComputedStyle(parDom, null).height)
       var bgUrl = window.getComputedStyle(parDom, null).backgroundImage
-      var canDomW = parseFloat(window.getComputedStyle(canvas, null).width);
-      var canDomH = parseFloat(window.getComputedStyle(canvas, null).height);
+      var canDomW = parseFloat(window.getComputedStyle(canvas, null).width)
+      var canDomH = parseFloat(window.getComputedStyle(canvas, null).height)
     } else {
-      var parDomW = parDom.currentStyle.width;
-      var canDomW = canvas.currentStyle.width;
-      var parDomH = parDom.currentStyle.height;
-      var canDomH = canvas.currentStyle.height;
+      var parDomW = parDom.currentStyle.width
+      var canDomW = canvas.currentStyle.width
+      var parDomH = parDom.currentStyle.height
+      var canDomH = canvas.currentStyle.height
       var bgUrl = parDom.currentStyle.backgroundImage
     }
 
@@ -123,7 +124,7 @@
 
     let img = new Image()
     // 获取父元素的背景图片
-    img.src = bgUrl.match(/(?<=")[^"]*(?=")/g)[0]
+    img.src = bgUrl.match(/\"(.*)\"/)[1]
     // 获取图片的宽高度
     var nWidth = 0
     var nHeight = 0
@@ -153,11 +154,10 @@
 
       if (flag === 1) {
         ctx.drawImage(img, (x2 - x1) / scale + factor, ((y2 - y1) / scale), canDomW / scale, canDomH / scale, 0, 0, canDomW, canDomH);
-        console.log(factor)
-
+        // console.log(factor)
       }
       if (flag === 2) {
-        console.log(factor)
+        // console.log(factor)
         ctx.drawImage(img, (x2 - x1) / scale, ((y2 - y1) / scale + factor), canDomW / scale, canDomH / scale, 0, 0, canDomW, canDomH);
       }
     }
