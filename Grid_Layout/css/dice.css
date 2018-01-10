@@ -10,7 +10,7 @@ html, body {
   width: 920px;
   margin: 50px auto;
 }
-
+/*start there --- --- --- --- ---*/
 .container {
   display: grid;
   grid-template-columns: repeat(3, 300px);

@@ -23,7 +23,7 @@ html, body {
   width: 80%;
   margin: 50px auto;
 }
-
+/*start there --- --- --- --- ---*/
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));

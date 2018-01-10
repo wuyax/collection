@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <link rel="stylesheet" href="css/index.css">
+  <title>grid area need to know</title>
+  <style type="text/css">
+
+    .container {
+      display: grid;
+      grid-template-columns: 200px 200px 200px;
+      grid-template-rows: 100px 100px;
+      grid-gap: 10px;
+      /*定义网格区域*/
+      /*网格区域定义要规整*/
+      /*网格冲突的时候以数量大的为准*/
+      grid-template-areas: "x y y y y z"
+                           "x y y y y z";
+    }
+
+    .item {
+      color: #fff;
+      background-color: #444;
+      text-align: center;
+    }
+
+    /*在Firefox中能看到网格区域的名字*/
+    .a {
+      grid-area: x;
+      background-color: #622954;
+    }
+
+    .b {
+      /*grid-area: z;*/
+      background-color: #6D2E5B;
+    }
+
+    .c {
+      background-color: #C1328E;
+    }
+
+    .d {
+      background-color: #A8497A;
+    }
+
+    .e {
+      background-color: #562E37;
+    }
+
+  </style>
+</head>
+
+<body>
+<div class="wrapper">
+  <div class="container">
+    <div class="item a">A</div>
+    <div class="item b">B</div>
+    <div class="item c">C</div>
+    <div class="item d">D</div>
+    <div class="item e">E</div>
+  </div>
+</div>
+</body>
+</html>
