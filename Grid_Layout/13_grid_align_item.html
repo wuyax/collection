@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <link rel="stylesheet" href="css/index.css">
+  <title>grid align item</title>
+  <style type="text/css">
+
+    .container {
+      display: grid;
+      grid-template-columns: 200px 200px 200px;
+      grid-template-rows: 100px 100px 100px;
+      /*stp2 设置item水平对齐 start|center|end*/
+      justify-items: center;
+      /*stp3 设置item垂直对齐 start|center|end*/
+      align-items: center;
+      /*stp 4*/
+      height: 600px;
+      /*stp5 设置网格的水平对齐方式 space-around|space-between|space-evenly|flex-start|flex-end|center*/
+      justify-content: space-around;
+      /*stp6 设置网格的垂直对齐方式 space-around|space-between|space-evenly|flex-start|flex-end|center*/
+      align-content: space-evenly;
+      grid-gap: 10px;
+    }
+    .item {
+      /*stp1. 给item设置大小*/
+      width: 60%;
+      height: 60%;
+      color: #fff;
+      background-color: #444;
+      line-height: 60px;
+      text-align: center;
+    }
+
+    .a{
+      /*设置单个item的水平对齐方式 self-start|center|self-end*/
+      justify-self: self-start;
+      /*设置单个item的垂直对齐方式 self-start|center|self-end*/
+      align-self: self-end;
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrapper">
+  <div class="container">
+    <div class="item a"><span class="item-sub">A</span></div>
+    <div class="item b"><span class="item-sub">B</span></div>
+    <div class="item c"><span class="item-sub">C</span></div>
+    <div class="item d"><span class="item-sub">D</span></div>
+    <div class="item e"><span class="item-sub">E</span></div>
+  </div>
+</div>
+</body>
+</html>

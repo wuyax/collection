@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <link rel="stylesheet" href="css/index.css">
+  <title>fractional unit</title>
+  <style type="text/css">
+
+    .container {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      grid-template-rows: 600px;
+      /*和img的width冲突*/
+      min-width: 400px;
+    }
+
+    .item {
+      color: #fff;
+      background-color: #444;
+      text-align: center;
+    }
+
+    .a {
+      background-color: #622954;
+    }
+
+    .b {
+      background-color: #C1328E;
+    }
+
+    .container img {
+      width: 600px;
+    }
+  </style>
+</head>
+
+<body>
+<!--TIPs-->
+<!--1. The fr unit fills up the available space BUT it is NEVER smaller than the minimum size of the grid container-->
+<!--2. The fr unit fills up the available space BUT it is NEVER smaller than the content of the row or column-->
+<!--3. In the case of a conflict, the fr unit is NEVER smaller than than the maximum of the container’s minimum width or the row/column content size.-->
+<div class="wrapper">
+  <div class="container">
+    <div class="item a">left bar</div>
+    <div class="item b">
+      content
+      <!--<img src="https://images.unsplash.com/photo-1500417148159-68083bd7333a?auto=format&fit=crop&w=3300&q=80"
+           alt="fractional unit">-->
+    </div>
+  </div>
+</div>
+</body>
+</html>

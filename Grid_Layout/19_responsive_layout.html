@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <link rel="stylesheet" href="css/index.css">
+  <title>responsive_layout</title>
+  <style type="text/css">
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: 50px 350px 50px;
+      grid-gap: 10px;
+      grid-template-areas:
+        "h h h h h h h h h h h h"
+        "m m c c c c c c c c c c"
+        "f f f f f f f f f f f f";
+    }
+    .header {
+      grid-area: h;
+    }
+    .menu {
+      grid-area: m;
+    }
+    .content {
+      grid-area: c;
+    }
+    .footer {
+      grid-area: f;
+    }
+
+    @media screen and (max-width: 640px) {
+      .container {
+        grid-template-areas:
+          "m m m m m m h h h h h h"
+          "c c c c c c c c c c c c"
+          "f f f f f f f f f f f f";
+      }
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrapper">
+  <div class="container">
+    <div class="header">HEADER</div>
+    <div class="menu">MENU</div>
+    <div class="content">CONTENT</div>
+    <div class="footer">FOOTER</div>
+  </div>
+</div>
+</body>
+</html>

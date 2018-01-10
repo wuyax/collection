@@ -22,3 +22,15 @@ ul, ol {
   margin: 50px auto;
 }
 
+.header {
+  background-color: #884C3A;
+}
+.menu {
+  background-color: #E83015;
+}
+.content {
+  background-color: #D75455;
+}
+.footer {
+  background-color: #B55D4C;
+}
