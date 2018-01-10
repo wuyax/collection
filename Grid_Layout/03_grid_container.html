@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <link rel="stylesheet" href="css/index.css">
+  <title>grid container</title>
+  <style type="text/css">
+    .container {
+      display: grid;
+      grid-template-columns: 200px 200px 200px;
+      grid-template-rows: 100px 100px;
+      grid-gap: 10px;
+    }
+
+    .item {
+      color: #fff;
+      line-height: 100px;
+      text-align: center;
+      background-color: #444;
+      /*外边距不会重叠*/
+      margin: 10px;
+    }
+
+    .a {
+      background-color: #622954;
+    }
+
+    .b {
+      background-color: #6D2E5B;
+    }
+
+    .c {
+      background-color: #C1328E;
+    }
+
+    .d {
+      background-color: #A8497A;
+    }
+
+    .e {
+      background-color: #562E37;
+    }
+
+  </style>
+</head>
+
+<body>
+<div class="wrapper">
+  <div class="container">
+    <div class="item a">A</div>
+    <div class="item b">B</div>
+    <div class="item c">C</div>
+    <div class="item d">D</div>
+    <div class="item e">E</div>
+  </div>
+</div>
+</body>
+</html>

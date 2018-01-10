@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <link rel="stylesheet" href="css/index.css">
+  <title>grid item</title>
+  <style type="text/css">
+    .container {
+      display: grid;
+      grid-template-columns: 200px 200px 200px;
+      grid-template-rows: 100px 100px;
+      grid-gap: 10px;
+    }
+
+    .item {
+      color: #fff;
+      line-height: 100px;
+      text-align: center;
+      background-color: #444;
+    }
+
+    .a {
+      background-color: #622954;
+    }
+
+    .b {
+      background-color: #6D2E5B;
+    }
+
+    .c {
+      background-color: #C1328E;
+    }
+
+    .d {
+      background-color: #A8497A;
+    }
+
+    .e {
+      background-color: #562E37;
+    }
+    .e:hover {
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+
+<body>
+<div class="wrapper">
+  <div class="container">
+    <div class="item a">A</div>
+    <!--float在item无效-->
+    <div class="item b" style="float: left;">B</div>
+    <div class="item c">C</div>
+    <div class="item d">D</div>
+    <!--没有html标签也会被认为是一个item-->
+    D2
+    <!--规范里说是inline-block 实现的时候不一致-->
+    <div class="item e">
+      E1
+      <!-- grid items do not split around blocks -->
+      <q style="display: block" id=not-an-item>E2</q>
+      E3
+    </div>
+  </div>
+</div>
+</body>
+<!--https://www.w3.org/TR/css3-grid-layout/#grid-items-->
+<script type="text/javascript">
+    document.getElementsByClassName('e')[0].addEventListener('click', function (ev) {
+      window.open('https://www.w3.org/TR/css3-grid-layout/#grid-items')
+
+    })
+</script>
+</html>
