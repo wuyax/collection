@@ -26,7 +26,7 @@
 </body>
 <script type="text/javascript">
   let numbers = [5, 458, 120, -215, 228, 400, 122205, -85411, [2, 3, 4, 5]];
-  let str = '   da shang  hai  '
+  let str = ' da shang hai '
 
   function maxInNumbers(arr) {
     return Math.max.apply(Math, numbers);
@@ -38,12 +38,17 @@
 
   /**
    * 删除字符串中所有的空格
-   * @param str
-   * @param new string
+   * @memberof util
+   * @author 彭庆凯 <pqk@jusfoun.com>
+   * @param {String} str 需要处理的字符串
+   * @param {String} new string
+   * @example let s = JFE.util.trim(' da shang hai ')// dashanghai
    */
-  function trim(str) {
+  function trimAll(str) {
     return str.replace(/\s+/g, "")
   }
+  export {trimAll}
+
 
   /**
    * 删除字符串两头的空格
@@ -66,8 +71,7 @@
   function copyArr(arr) {
     return arr.concat()
   }
-
-  // export {copyArr}
+  export {copyArr}
   /**
    * 将URL里的查询参数转换成对象的形式
    * @memberof util
@@ -89,8 +93,7 @@
     }
     return GET;
   }
-
-  // export {getQuery}
+  export {getQuery}
   /**
    * 格式化数字
    * @memberof util
