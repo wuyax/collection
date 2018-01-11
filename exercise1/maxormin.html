@@ -24,51 +24,129 @@
 <body>
 
 </body>
-  <script type="text/javascript">
-      let numbers = [5, 458 , 120 , -215 , 228 , 400 , 122205, -85411];
-      let str = '   da shang  hai  '
-      function maxInNumbers(arr) {
-        return Math.max.apply(Math, numbers);
+<script type="text/javascript">
+  let numbers = [5, 458, 120, -215, 228, 400, 122205, -85411, [2, 3, 4, 5]];
+  let str = '   da shang  hai  '
+
+  function maxInNumbers(arr) {
+    return Math.max.apply(Math, numbers);
+  }
+
+  function minInNumbers(arr) {
+    return Math.min.apply(Math, numbers);
+  }
+
+  /**
+   * 删除字符串中所有的空格
+   * @param str
+   * @param new string
+   */
+  function trim(str) {
+    return str.replace(/\s+/g, "")
+  }
+
+  /**
+   * 删除字符串两头的空格
+   * @param str
+   * @param new string
+   */
+
+  function trim2(str) {
+    return str.replace(/^\s+|\s+$/g, '')
+  }
+
+  /**
+   * 复制一个数组
+   * @memberof util
+   * @author 彭庆凯 <pqk@jusfoun.com>
+   * @param {Array}arr 传入数组
+   * @return {Array}   返回一个新的数组
+   * @example let arr = JFE.util.copyArr([1,2,3,4,5,6])   // [1,2,3,4,5,6]
+   */
+  function copyArr(arr) {
+    return arr.concat()
+  }
+
+  // export {copyArr}
+  /**
+   * 将URL里的查询参数转换成对象的形式
+   * @memberof util
+   * @author 彭庆凯 <pqk@jusfoun.com>
+   * @param null
+   * @return {Object} 返回一个对象
+   * @example let arr = JFE.util.getQuery()   // {type: 'atype',value: '234'}
+   */
+  function getQuery() {
+    let querystr = window.location.href.split("?")
+    let GET = {};
+    if (querystr[1]) {
+      let GETs = querystr[1].split("&");
+      for (let i = 0; i < GETs.length; i++) {
+        let tmp_arr = GETs[i].split("=")
+        let key = tmp_arr[0]
+        GET[key] = tmp_arr[1]
       }
+    }
+    return GET;
+  }
 
-      function minInNumbers(arr) {
-        return Math.min.apply(Math, numbers);
+  // export {getQuery}
+  /**
+   * 格式化数字
+   * @memberof util
+   * @author 彭庆凯 <pqk@jusfoun.com>
+   * @param {Number} num 需要格式化的数字
+   * @param {String} fromat
+   * @return {string} 返回格式化以后的字符串
+   * @example let num = JFE.util.formatNum(123455.66,'zh-Hans-CN-u-nu-hanidec') // 一二三,四五五.六六
+   */
+  function formatNum(num, fromat) {
+    let f = fromat || 'en-US'
+    return num.toLocaleString(f)
+  }
+  export {formatNum}
+  // console.log(formatNum(123455.66, 'zh-Hans-CN-u-nu-hanidec'));
+
+  function getURl(baseUrl, params) {
+    let regular = /^\b(((https?|ftp):\/\/)?[-a-z0-9]+(\.[-a-z0-9]+)*\.(?:com|edu|gov|int|mil|net|org|biz|info|name|museum|asia|coop|aero|[a-z][a-z]|((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d))\b(\/[-a-z0-9_:\@&?=+,.!\/~%\$]*)?)$/i
+    let urlStr = ''
+    if (regular.test(baseUrl)) {
+      for (let key in params) {
+        urlStr += `&${key}=${params[key]}`
       }
-
-      /**
-       * 删除字符串中所有的空格
-       * @param str
-       * @param new string
-       */
-      function trim(str) {
-        return str.replace(/\s+/g, "")
+      if(baseUrl.indexOf('?') >= 0){
+        return baseUrl + urlStr
+      } else {
+        return baseUrl + urlStr.replace(/^\&/, '?')
       }
+    }else {
+      console.warn('不是一个有效的URL')
+    }
+  }
 
-      /**
-       * 删除字符串两头的空格
-       * @param str
-       * @param new string
-       */
-      function trim2(str) {
-        return str.replace(/^\s+|\s+$/g, '')
-      }
+  console.log(getURl('dsfdsfd', {
+    name: 'zhangsan',
+    value: 234
+  }));
 
-      /**
-       * 复制一个数组
-       * @param arr
-       * @return {Array|*|T[]|string}
-       */
-      function copyArr(arr) {
-        return arr.concat()
-      }
+  function IsURL(strUrl) {
+    var regular = /^\b(((https?|ftp):\/\/)?[-a-z0-9]+(\.[-a-z0-9]+)*\.(?:com|edu|gov|int|mil|net|org|biz|info|name|museum|asia|coop|aero|[a-z][a-z]|((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d))\b(\/[-a-z0-9_:\@&?=+,.!\/~%\$]*)?)$/i
+    if (regular.test(strUrl)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  console.log(IsURL('ftp://localhost.com.cn/?_ijt=tg360hfge7gassskjs5tle1odc&a=334'));
 
 
-      let newa = copyArr(numbers)
-      newa[1]= 100
-      console.log(newa)
-      console.log(numbers)
-      // console.log(trim2(str))
-      // console.log(str)
-      // console.log(maxInNumbers(numbers),minInNumbers(numbers))
-  </script>
+  let newa = copyArr(numbers)
+  newa[1] = 100
+  // console.log(newa)
+  // console.log(numbers)
+  // console.log(trim2(str))
+  // console.log(str)
+  // console.log(maxInNumbers(numbers),minInNumbers(numbers))
+</script>
 </html>

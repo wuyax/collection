@@ -87,8 +87,11 @@
 
   /**
    * 绘制和背景图片一致的图片
+   * @memberof util
+   * @author 彭庆凯 <pqk@jusfoun.com>
    * @param parId 父元素容器ID
    * @param canID canvas容器ID
+   * @return undefined
    */
   function fullFill(parId, canID) {
 
@@ -154,10 +157,8 @@
 
       if (flag === 1) {
         ctx.drawImage(img, (x2 - x1) / scale + factor, ((y2 - y1) / scale), canDomW / scale, canDomH / scale, 0, 0, canDomW, canDomH);
-        // console.log(factor)
-      }
+      } else
       if (flag === 2) {
-        // console.log(factor)
         ctx.drawImage(img, (x2 - x1) / scale, ((y2 - y1) / scale + factor), canDomW / scale, canDomH / scale, 0, 0, canDomW, canDomH);
       }
     }
