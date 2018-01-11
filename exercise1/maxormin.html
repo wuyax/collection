@@ -47,7 +47,7 @@
   function trimAll(str) {
     return str.replace(/\s+/g, "")
   }
-  export {trimAll}
+  // export {trimAll}
 
 
   /**
@@ -71,7 +71,7 @@
   function copyArr(arr) {
     return arr.concat()
   }
-  export {copyArr}
+  // export {copyArr}
   /**
    * 将URL里的查询参数转换成对象的形式
    * @memberof util
@@ -93,7 +93,7 @@
     }
     return GET;
   }
-  export {getQuery}
+  // export {getQuery}
   /**
    * 格式化数字
    * @memberof util
@@ -107,7 +107,7 @@
     let f = fromat || 'en-US'
     return num.toLocaleString(f)
   }
-  export {formatNum}
+  // export {formatNum}
   // console.log(formatNum(123455.66, 'zh-Hans-CN-u-nu-hanidec'));
 
   function getURl(baseUrl, params) {
@@ -141,7 +141,7 @@
     }
   }
 
-  console.log(IsURL('ftp://localhost.com.cn/?_ijt=tg360hfge7gassskjs5tle1odc&a=334'));
+  // console.log(IsURL('ftp://localhost.com.cn/?_ijt=tg360hfge7gassskjs5tle1odc&a=334'));
 
 
   let newa = copyArr(numbers)
@@ -151,5 +151,102 @@
   // console.log(trim2(str))
   // console.log(str)
   // console.log(maxInNumbers(numbers),minInNumbers(numbers))
+
+  const extend = function() {
+    var copyIsArray,
+      toString = Object.prototype.toString,
+      hasOwn = Object.prototype.hasOwnProperty,
+
+      class2type = {
+        '[object Boolean]': 'boolean',
+        '[object Number]': 'number',
+        '[object String]': 'string',
+        '[object Function]': 'function',
+        '[object Array]': 'array',
+        '[object Date]': 'date',
+        '[object RegExp]': 'regExp',
+        '[object Object]': 'object'
+      },
+
+      type = function(obj) {
+        return obj == null ? String(obj) : class2type[toString.call(obj)] || "object";
+      },
+
+      isWindow = function(obj) {
+        return obj && typeof obj === "object" && "setInterval" in obj;
+      },
+
+      isArray = Array.isArray || function(obj) {
+        return type(obj) === "array";
+      },
+
+      isPlainObject = function(obj) {
+        if (!obj || type(obj) !== "object" || obj.nodeType || isWindow(obj)) {
+          return false;
+        }
+
+        if (obj.constructor && !hasOwn.call(obj, "constructor") &&
+          !hasOwn.call(obj.constructor.prototype, "isPrototypeOf")) {
+          return false;
+        }
+
+        var key;
+        for (key in obj) {}
+
+        return key === undefined || hasOwn.call(obj, key);
+      };
+
+      return function extend(deep, target, options) {
+        for (var name in options) {
+          var src = target[name];
+          var copy = options[name];
+
+          if (target === copy) {
+            continue;
+          }
+
+          if (deep && copy &&
+            (isPlainObject(copy) || (copyIsArray = isArray(copy)))) {
+            if (copyIsArray) {
+              copyIsArray = false;
+              var clone = src && isArray(src) ? src : [];
+
+            } else {
+              var clone = src && isPlainObject(src) ? src : {};
+            }
+
+            target[name] = extend(deep, clone, copy);
+          } else if (copy !== undefined) {
+            target[name] = copy;
+          }
+        }
+
+        return target;
+      };
+
+    // return { extend: extend };
+  }();
+  // export {extend}
+  let t={
+    a: 'aa',
+    b: {
+      c: 'cc',
+      d: 'dd'
+    }
+  }
+  let t2= {
+    e: 'ee',
+    f: 'ff',
+    a: 'zz',
+    b: {
+      c: 'yy',
+      g: 'gg'
+    }
+  }
+
+  // console.log(extend)
+  console.log(extend(true, t, t2));
+  // console.log(t)
+  // console.log(t2)
 </script>
 </html>

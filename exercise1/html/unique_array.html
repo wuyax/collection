@@ -73,4 +73,25 @@
   document.getElementsByClassName('new-arr')[0].innerHTML = unique2(arr).toString()
   //console.log(unique2(arr));
 </script>
+<script type="text/javascript" src="../js/extend.js"></script>
+<script type="text/javascript">
+  let t={a: 'aa',
+    b: {
+      c: 'cc',
+      d: 'dd'
+    }
+  }
+  let t2= {
+    e: 'ee',
+    f: 'ff',
+    a: 'zz',
+    b: {
+      c: 'yy',
+      g: 'gg'
+    }
+  }
+
+  // console.log(extend)
+  console.log(extend(true, t, t2));
+</script>
 </html>
