@@ -1,5 +1,5 @@
 /**
- * 合并两个对象
+ * 合并两个对象类似于jQuery的extend
  * @memberof util
  * @author 彭庆凯 <pqk@jusfoun.com>
  * @param {Boolean} deep 是否深度合并
