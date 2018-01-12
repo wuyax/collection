@@ -45,12 +45,14 @@
       /*background-size: cover;*/
       position: relative;
       z-index: -1;
+      text-align: center;
     }
 
     #can {
       position: absolute;
       top: 50px;
-      left: 50px;
+      left: 50%;
+      transform: translateX(-50%);
     }
   </style>
 </head>
@@ -74,7 +76,7 @@
   text there text theretext theretext theretext theretext theretext theretext theretext there<br/>
   text there text theretext theretext theretext theretext theretext theretext theretext there<br/>
 
-  <canvas id="can" width="500" ; height="500" ;></canvas>
+  <canvas id="can" width="300" ; height="300" ;></canvas>
 </div>
 </body>
 <script type="text/javascript">
