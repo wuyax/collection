@@ -7,9 +7,10 @@ import pig from '@/components/pig';
 import test1 from '@/components/test1';
 import test2 from '@/components/test2';
 import test3 from '@/components/test3';
+
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -18,7 +19,8 @@ export default new Router({
       component: HelloWorld,
       meta: {
         title: 'root'
-      }
+      },
+      // redirect: '/dog'
     },
     {
       path: '/cat/:id',
@@ -40,7 +42,7 @@ export default new Router({
           meta: {
             title: 'test2'
           }
-        },{
+        }, {
           path: 'test3',
           name: 'test3',
           component: test3,
@@ -68,7 +70,7 @@ export default new Router({
             console.log(from)
             next()
           }
-        },{
+        }, {
           path: 'y',
           name: 'y',
           components: {
@@ -93,3 +95,12 @@ export default new Router({
     }
   ]
 })
+/*router.beforeEach((to, from, next) => {
+  if (to.path === '/dog' || sessionStorage.getItem('accessToken')) {
+    next()
+  } else if (!sessionStorage.getItem('accessToken')) {
+    next({path: '/'})
+  }
+})*/
+
+export default router

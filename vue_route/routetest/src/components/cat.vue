@@ -22,7 +22,7 @@
     },
     methods: {
       setTitle() {
-        document.title= '改变了标题'
+        document.title= 'cat改变了标题'
       }
     }
   }

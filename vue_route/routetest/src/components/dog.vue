@@ -11,7 +11,15 @@
 
 <script>
   export default {
-    name: "dog"
+    name: "dog",
+    created() {
+      this.setTitle()
+    },
+    methods: {
+      setTitle() {
+        document.title= 'dog改变了标题'
+      }
+    }
   }
 </script>
 

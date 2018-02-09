@@ -6,7 +6,15 @@
 
 <script>
   export default {
-    name: "pig"
+    name: "pig",
+    created() {
+      this.setTitle()
+    },
+    methods: {
+      setTitle() {
+        document.title= 'pig改变了标题'
+      }
+    }
   }
 </script>
 

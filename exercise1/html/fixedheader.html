@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>Fixed Header</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    img {
+      vertical-align: middle;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+    body {
+      font: 12px/1.5 \5FAE\8F6F\96C5\9ED1, \5B8B\4F53, "Hiragino Sans GB", STHeiti, "WenQuanYi Micro Hei", "Droid Sans Fallback", SimSun, sans-serif;
+      line-height: 1.5;
+    }
+    html, body {
+      width: 100%;
+      /*min-width: 1280px;*/
+    }
+    .main-warp {
+      width: 100%;
+      min-width: 1280px;
+    }
+    #headers {
+      width: 100%;
+      min-width: 1280px;
+      height: 80px;
+      background-color: yellowgreen;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+    #headers h1 {
+      padding-left: 20px;
+    }
+    #headers span {
+      padding-right: 20px;
+    }
+    .container {
+      width: 100%;
+      min-width: 1280px;
+      padding-top: 80px;
+    }
+    .text1 {
+      width: 100%;
+      height: 800px;
+      background-color: lightblue;
+    }
+    .text2 {
+      width: 100%;
+      height: 800px;
+      background-color: navajowhite;
+    }
+  </style>
+</head>
+<!--固定定位的header 在达到最小宽度,水平滚动的时候header会跟随水平滚动-->
+<body>
+<div class="main-warp">
+  <header id="headers">
+    <h1>鹰潭农业大数据</h1>
+    <span>返回首页</span>
+  </header>
+  <div id="cont" class="container">
+    <div class="text1">text1</div>
+    <div class="text2">text2</div>
+  </div>
+</div>
+</body>
+<script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+  function handleScroll() {
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+    var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft
+    document.getElementById('headers').style.left = -scrollLeft+ 'px'
+  };
+    window.addEventListener('scroll', handleScroll)
+
+</script>
+</html>

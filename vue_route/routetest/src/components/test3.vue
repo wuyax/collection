@@ -4,7 +4,15 @@
 
 <script>
   export default {
-    name: "test3"
+    name: "test3",
+    created() {
+      this.setTitle()
+    },
+    methods: {
+      setTitle() {
+        document.title= 'test3改变了标题'
+      }
+    }
   }
 </script>
 

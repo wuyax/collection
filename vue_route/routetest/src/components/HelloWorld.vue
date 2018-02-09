@@ -22,6 +22,7 @@
       <router-link to="cat/son">cat</router-link>
       <router-link to="pig">pig</router-link>
     </ul>
+    <router-view @route-data-loaded="changeTitle"></router-view>
   </div>
 </template>
 
@@ -32,6 +33,18 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  created() {
+    // this.setTitle()
+  },
+  methods: {
+    changeTitle(vm) {
+      console.log('hahhahahh')
+      // document.title = vm.docTitle
+    }
+    /*setTitle() {
+      document.title= 'hellow改变了标题'
+    }*/
   }
 }
 </script>
