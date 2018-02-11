@@ -47,17 +47,18 @@
   function randomData() {
     return (Math.random() * 40).toFixed(2);
   }
-console.log(12+20.2+9.2)
+
+  console.log(12 + 20.2 + 9.2)
   // 初始化地图
   let myChart = echarts.init(document.getElementById('chartbox'))
   let affectAreaData = {
     yAxisData: ['余江县', '月湖区', '贵溪区', '信江新区'],
     data: {
-      '水产品': [12, 22.1, 13.5, 22.1],
-      '蔬菜': [20.3, 18.9, 16.5, 17],
-      '粮油': [9.2, 12, 22, 19.9],
-      '果品': [16.3, 14, 22, 17],
-      '畜禽': [11, 14.5, 19.2, 10.9],
+      '水产品': [12, 22, 13.5, 22],
+      '蔬菜': [20, 18, 16.5, 17],
+      '粮油': [9, 12, 22, 19],
+      '果品': [16, 14, 22, 17],
+      '畜禽': [11, 14.5, 19.4, 10.9],
     }
   }
   let option = {
@@ -177,6 +178,7 @@ console.log(12+20.2+9.2)
     let cache = [[], [], [], []]
     for (let i = 0; i < legendData.length; i++) {
       for (let j = 0; j < legendData[i].length; j++) {
+        // 构建一个新的二维数组
         cache[j].push(legendData[i][j])
       }
     }
@@ -213,6 +215,7 @@ console.log(12+20.2+9.2)
     )
     // y轴的数据
     option.yAxis.data = affectAreaData.yAxisData
+    myChart.setOption(option);
 
     // legend的事件
     myChart.on('legendselectchanged', (ev) => {
@@ -242,10 +245,11 @@ console.log(12+20.2+9.2)
       // console.log(option)
       // 重新给图表添加数据，注意这里不能带额外的选项
       myChart.setOption(option);
-    })
-    myChart.setOption(option);
-  }
+      let newOption = myChart.getOption()
+      console.log(newOption)
 
+    })
+  }
   initChart()
 </script>
 </html>
