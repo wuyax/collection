@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
+  <script type="text/javascript" src="../js/echarts.min.js"></script>
+  <title>图表堆叠的时候显示所有的数据并相应legend变化</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    img {
+      vertical-align: middle;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+
+    .chart-wrap {
+      width: 100%;
+      height: 100%;
+    }
+
+    #chartbox {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+<div class="chart-wrap">
+  <div id="chartbox"></div>
+</div>
+</body>
+<script type="text/javascript">
+  function randomData() {
+    return (Math.random() * 40).toFixed(2);
+  }
+console.log(12+20.2+9.2)
+  // 初始化地图
+  let myChart = echarts.init(document.getElementById('chartbox'))
+  let affectAreaData = {
+    yAxisData: ['余江县', '月湖区', '贵溪区', '信江新区'],
+    data: {
+      '水产品': [12, 22.1, 13.5, 22.1],
+      '蔬菜': [20.3, 18.9, 16.5, 17],
+      '粮油': [9.2, 12, 22, 19.9],
+      '果品': [16.3, 14, 22, 17],
+      '畜禽': [11, 14.5, 19.2, 10.9],
+    }
+  }
+  let option = {
+    backgroundColor: '#777',
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'shadow'
+      },
+      formatter: function (params) {
+        let str = `<p>${params[0].name}</p>`
+        params.forEach(function (v, i) {
+          if (v.seriesName) {
+            str += `<p>${v.marker} ${v.seriesName}:${v.value}</p>`
+          }
+        })
+        return str
+      }
+    },
+    grid: {
+      left: '65',
+      right: '10',
+      bottom: '5',
+      top: '100',
+      containLabel: true
+    },
+    legend: {
+      show: true,
+      left: 'center',
+      top: 20,
+      data: ['水产品', '蔬菜', '粮油', '果品', '畜禽']
+    },
+    xAxis: {
+      show: false,
+      type: 'value',
+      axisTick: {
+        show: false
+      },
+      splitLine: {
+        show: false
+      },
+      axisLine: {
+        show: false,
+        lineStyle: {
+          color: '#62e2dd'
+        }
+      },
+      axisLabel: {
+        textStyle: {
+          color: '#d9eee7'
+        }
+      },
+      // 这个地方也是重要的，设置X轴的最大值。
+      max: function (value) {
+        return value.max * 0.55
+      }
+    },
+    yAxis: {
+      type: 'category',
+      inverse: true,
+      data: [],
+      axisTick: {
+        show: false
+      },
+      axisLine: {
+        show: false,
+        lineStyle: {
+          color: '#62e2dd'
+        }
+      },
+      axisLabel: {
+        textStyle: {
+          color: '#d9eee7'
+        }
+      }
+    },
+    series: []
+  };
+
+  function initChart() {
+    // 新建一个数组临时保存数据
+    let newSeries = []
+    let bordercolor = ['rgba(75,229,50,1)', 'rgba(196,35,16,1)', 'rgba(227,201,15,1)', 'rgba(29,197,231,1)', 'rgba(29,89,231,1)']
+    let color = ['rgba(75,229,50,0.4)', 'rgba(196,35,16,0.4)', 'rgba(227,201,15,0.4)', 'rgba(29,197,231,0.4)', 'rgba(29,89,231,0.4)']
+    // 添加新数据
+    let i = 0
+    let legendData = []
+    option.series = newSeries
+    if (Object.keys(affectAreaData.data).length) {
+      for (let item in affectAreaData.data) {
+        legendData.push(affectAreaData.data[item])
+        newSeries.push({
+          name: item,
+          type: 'bar',
+          stack: 'x',
+          barWidth: 16,
+          label: {
+            normal: {
+              show: false,
+              position: 'insideRight'
+            }
+          },
+          itemStyle: {
+            normal: {
+              color: color[i],
+              borderWidth: 1,
+              borderColor: bordercolor[i]
+            }
+          },
+          data: affectAreaData.data[item]
+        })
+        i++
+      }
+    }
+
+    // 这个地方需要优化，长度写死了
+    let cache = [[], [], [], []]
+    for (let i = 0; i < legendData.length; i++) {
+      for (let j = 0; j < legendData[i].length; j++) {
+        cache[j].push(legendData[i][j])
+      }
+    }
+    // 就算总数
+    let sum = []
+    for (let i = 0; i < cache.length; i++) {
+      sum.push(cache[i].reduce((sum, v) => {
+          return sum + v
+        })
+      )
+    }
+    // 添加一个额外的系列来显示总数
+    newSeries.push(
+      {
+        name: '',
+        type: 'bar',
+        stack: 'x',
+        barWidth: 16,
+        formatter: '{c}',
+        label: {
+          normal: {
+            show: true,
+            position: 'insideLeft'
+          }
+        },
+        itemStyle: {
+          normal: {
+            color: 'transparent',
+            borderWidth: 1,
+          }
+        },
+        data: sum
+      }
+    )
+    // y轴的数据
+    option.yAxis.data = affectAreaData.yAxisData
+
+    // legend的事件
+    myChart.on('legendselectchanged', (ev) => {
+      legendData = []
+      for (let item in affectAreaData.data) {
+        if (ev.selected[item]) {
+          legendData.push(affectAreaData.data[item])
+        }
+      }
+      cache = [[], [], [], []]
+      for (let i = 0; i < legendData.length; i++) {
+        for (let j = 0; j < legendData[i].length; j++) {
+          cache[j].push(legendData[i][j])
+        }
+      }
+      sum = []
+      // console.log(cache)
+      for (let i = 0; i < cache.length; i++) {
+        if (cache[i].length) {
+          sum.push(cache[i].reduce((sum, v) => {
+              return sum + v
+            })
+          )
+        }
+      }
+      newSeries[newSeries.length - 1].data = sum
+      // console.log(option)
+      // 重新给图表添加数据，注意这里不能带额外的选项
+      myChart.setOption(option);
+    })
+    myChart.setOption(option);
+  }
+
+  initChart()
+</script>
+</html>

@@ -216,7 +216,27 @@
           }
         }
       },
+      {
+        name: '不成交',
+        type: 'line',
+        smooth: false,
+        itemStyle: {normal: {areaStyle: {type: 'default'}}},
+        data: [2, 11, 13, 3, 11, 21, 19, 15, 10, 13, 11, 20],
+        symbolSize: 8,
+        areaStyle: {
+          normal: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+              offset: 0.7,
+              color: 'rgba(22,255,203,0.83)'
+            }, {
+              offset: 1,
+              color: 'rgba(11,209,255,0.83)'
+            }]),
+            opacity: 0.2
 
+          }
+        }
+      },
     ]
   };
   // 模拟显示加载数据的过程
@@ -231,6 +251,21 @@
     //隐藏数据加载
     myChart.hideLoading()
     myChart.setOption(option);
+
+    // 初始化的时候高亮制定的数据
+    myChart.dispatchAction({
+      type: 'highlight',
+      // 可选，系列 index，可以是一个数组指定多个系列
+      // seriesIndex: 0,
+      // 可选，系列名称，可以是一个数组指定多个系列
+      // seriesName?: string|Array,
+      // 可选，数据的 index
+      // dataIndex?: number,
+      // 可选，数据的 名称
+      seriesName: '成交',
+      name: '3月'
+    })
   }, 3000)
+
 </script>
 </html>
