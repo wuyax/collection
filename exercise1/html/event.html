@@ -20,10 +20,26 @@
     }
 
     .box {
+      text-align: center;
       width: 100px;
       height: 100px;
-      background-color: yellowgreen;
+      line-height: 100px;
+      background-color: greenyellow;
       margin: 20px;
+      -webkit-transition: all 0.2s ease-in;
+      -moz-transition: all 0.2s ease-in;
+      -ms-transition: all 0.2s ease-in;
+      -o-transition: all 0.2s ease-in;
+      transition: all 0.2s ease-in;
+    }
+
+    .box:hover {
+      cursor: pointer
+    }
+
+    .box:active {
+      background-color: yellowgreen;
+      color: #fff;
     }
   </style>
 </head>
@@ -54,7 +70,7 @@
     'detail': {
       name: 'zhangsan',
       age: 12,
-      addr : 'shanghai'
+      addr: 'shanghai'
     }
   })
   let box2 = document.getElementById('box2')
