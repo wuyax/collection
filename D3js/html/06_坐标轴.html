@@ -63,16 +63,16 @@
     .scale(linear)
     .ticks(7)
 
-  var yaxis = d3.axisLeft()
-    .scale()
-    .ticks(10)
+  // var yaxis = d3.axisLeft()
+  //   .scale()
+  //   .ticks(10)
 
   svg.append('g').attr("transform", "translate(20,280)")
     .call(xaxis)
 
-  svg.append('g')
-    .attr('transform', 'translate(18,0)')
-    .call(yaxis)
+  // svg.append('g')
+  //   .attr('transform', 'translate(18,0)')
+  //   .call(yaxis)
 
   var rectHeight = 25;   //每个矩形所占的像素高度(包括空白)
 
