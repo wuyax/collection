@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
   <script type="text/javascript" src="../d3/d3.min.js"></script>
-  <title>01_开始</title>
+  <title>02_数据绑定</title>
   <style type="text/css">
     * {
       margin: 0;
@@ -23,9 +23,31 @@
 </head>
 
 <body>
-<div id="box"></div>
+<p>Apple</p>
+<p>Pear</p>
+<p>Banana</p>
+
 </body>
 <script type="text/javascript">
+  // 绑定单个元素
+  var str = "China";
+  var body = d3.select("body");
+  var p = body.selectAll("p");
+
+  /*p.datum(str);
+
+  p.text(function(d, i){
+    console.log(d)
+    return "第 "+ i + " 个元素绑定的数据是 " + d;
+  });*/
+
+  // 绑定数组
+  var dataset = ["I like dog", "I like cat", "I like snake"];
+  p.data(dataset)
+    .text(function (d, i) {
+      console.log(d)
+      return d;
+    });
 
 </script>
 </html>
