@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>五星评价</title>
+  <style type="text/css">
+    .container{
+      width: 150px;
+      height: 30px;
+      position: relative;
+    }
+    .container ul{
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      list-style: none;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .container li{
+      z-index: 1;
+      width: 20%;
+      height: 100%;
+      float: left;
+      background: #faf;
+      border-radius: 50%;
+      /*box-shadow: 2px red inset;*/
+    }
+    .container li:hover+span{
+      display: block;
+      z-index: 99;
+      width: 500%;
+      height: 100%;
+      float: left;
+      background: #afa;
+    }
+    span.show{
+      display: block;
+      z-index: 99;
+      width: 500%;
+      height: 100%;
+      float: left;
+      background: #afa;
+    }
+    .backer{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    .backer li{
+      background: #999;
+    }
+  </style>
+</head>
+<body>
+<!--这个实现真是糟透了，反正我是觉得很难用-->
+<form class="" action="" method="post">
+  <input type="text" name="star" value="5" style="display:none">
+</form>
+<div class="container">
+  <div class="backer">
+    <ul>
+      <li ></li>
+      <li ></li>
+      <li ></li>
+      <li ></li>
+      <li ></li>
+    </ul>
+  </div>
+  <ul>
+    <li class="li1"></li><span></span>
+    <li class="li2"></li><span></span>
+    <li class="li3"></li><span></span>
+    <li class="li4"></li><span></span>
+    <li class="li5"></li><span></span>
+  </ul>
+</div>
+<div>another div </div>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+  var spans=[];
+  var form =$("form")
+  $(".container li").on("click",function(e){
+    console.log(e.target.className.split("i")[1]);
+    // form.star.value=e.target.className.split("i")[1];
+    console.log($("."+e.target.className).next());
+    $("."+e.target.className).next().addClass("show");
+    spans=$("span.show");
+  })
+  $(".container ul").mouseenter(function(){
+    if(spans.length>0)spans.removeClass("show");
+    console.log(spans);
+  })
+  $(".container ul").mouseleave(function(){
+    spans.addClass("show")
+  })
+</script>
+</body>
+</html>
