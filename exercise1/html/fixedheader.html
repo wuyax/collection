@@ -42,11 +42,19 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: relative;
+      position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      transition: all 0.5s ease-in;
+      transition: all 0.35s ease-in;
+    }
+
+    #headers.pinned {
+      transform: translateY(0);
+    }
+
+    #headers.unpinned {
+      transform: translateY(-100%);
     }
 
     #headers h1 {
@@ -60,6 +68,8 @@
     .container {
       width: 100%;
       min-width: 1280px;
+      padding-top: 80px;
+      background-color: lightblue;
     }
 
     .text1 {
@@ -73,12 +83,13 @@
       height: 800px;
       background-color: navajowhite;
     }
+
   </style>
 </head>
 <!--固定定位的header 在达到最小宽度,水平滚动的时候header会跟随水平滚动-->
 <body>
 <div class="main-warp">
-  <header id="headers">
+  <header id="headers" class="pinned">
     <h1>鹰潭农业大数据</h1>
     <span>返回首页</span>
   </header>
@@ -94,20 +105,53 @@
     let node = document.getElementById(id)
     node.style.position = type
     node.style.left = 0 + 'px'
-    node.style.top = 0+'px'
+    node.style.top = 0 + 'px'
   }
+  let header = document.getElementById('headers')
+
+  /***
+   * 判断滚动方向
+   * @param fn
+   */
+  function scrollDirection(fn) {
+    let beforeScrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop,
+      fnc = fn || function () {
+      };
+    window.addEventListener("scroll", function () {
+      let afterScrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop,
+        delta = afterScrollTop - beforeScrollTop;
+      if (delta === 0) return false;
+      fnc(delta > 0 ? "down" : "up");
+      beforeScrollTop = afterScrollTop;
+    }, false);
+  }
+
+  // 调用
+  scrollDirection(function (x) {
+    if (x === 'up') {
+      header.classList.remove('unpinned')
+      header.classList.add('pinned')
+    } else if (x === 'down') {
+      header.classList.remove('pinned')
+      header.classList.add('unpinned')
+    }
+  })
+
+  /***
+   * 获取垂直和水平滚动的距离
+   */
   function handleScroll() {
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
     var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft
     console.log(scrollTop)
     document.getElementById('headers').style.left = -scrollLeft + 'px'
-    if(scrollTop >= 80){
-      fixed('headers','fixed')
+    if (scrollTop >= 80) {
+      fixed('headers', 'fixed')
     } else {
       fixed('headers', 'relative')
     }
   };
-  window.addEventListener('scroll', handleScroll)
+  // window.addEventListener('scroll', handleScroll)
 
 </script>
 </html>
