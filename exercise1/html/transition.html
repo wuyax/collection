@@ -32,6 +32,18 @@
       transform: rotate(15deg);
       background-color: red;
     }
+    .btn {
+
+    }
+    .line {
+      width: 20px;
+      height: 20px;
+      background-color: yellowgreen;
+      transition: all .3s ease-in-out;
+    }
+    .long-line {
+      width: 100px;
+    }
   </style>
 </head>
 
@@ -39,11 +51,21 @@
   <div class="wripper">
     <div class="box"></div>
   </div>
+<button id="btn">点击变变变</button>
+<div class="line"></div>
 </body>
 <script type="text/javascript">
   var box = document.getElementsByClassName('box')[0]
   setTimeout(()=>{
       box.className = 'box boxnext'
   },1000)
+
+  var btn = document.getElementById('btn')
+  var line = document.getElementsByClassName('line')[0]
+  btn.addEventListener('click', showline)
+  function showline() {
+    console.log('gogogoo')
+    line.classList.add('long-line')
+  }
 </script>
 </html>
