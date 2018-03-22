@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>ajax下载文件</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    img {
+      vertical-align: middle;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+  </style>
+</head>
+
+<body>
+<button id="btn">下载</button>
+</body>
+<script type="text/javascript">
+  let btn = document.getElementById('btn')
+  var blobObject = new Blob(["I scream. You scream. We all scream for ice cream."]);
+  btn.addEventListener('click', go)
+
+  function go() {
+    downloadFile(blobObject, 'hello.txt')
+  }
+  
+  function downloadFile(data, filename, mime) {
+    var blob = new Blob([data], {type: mime || 'application/octet-stream'});
+    if (typeof window.navigator.msSaveBlob !== 'undefined') {
+      // IE workaround for "HTML7007: One or more blob URLs were
+      // revoked by closing the blob for which they were created.
+      // These URLs will no longer resolve as the data backing
+      // the URL has been freed."
+      window.navigator.msSaveBlob(blob, filename);
+    }
+    else {
+      var blobURL = window.URL.createObjectURL(blob);
+      var tempLink = document.createElement('a');
+      tempLink.style.display = 'none';
+      tempLink.href = blobURL;
+      tempLink.setAttribute('download', filename);
+
+      // Safari thinks _blank anchor are pop ups. We only want to set _blank
+      // target if the browser does not support the HTML5 download attribute.
+      // This allows you to download files in desktop safari if pop up blocking
+      // is enabled.
+      if (typeof tempLink.download === 'undefined') {
+        tempLink.setAttribute('target', '_blank');
+      }
+
+      document.body.appendChild(tempLink);
+      tempLink.click();
+      document.body.removeChild(tempLink);
+      window.URL.revokeObjectURL(blobURL);
+    }
+  }
+</script>
+</html>
