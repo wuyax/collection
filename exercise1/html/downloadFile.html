@@ -27,12 +27,13 @@
 <script type="text/javascript">
   let btn = document.getElementById('btn')
   var blobObject = new Blob(["I scream. You scream. We all scream for ice cream."]);
+
   btn.addEventListener('click', go)
 
   function go() {
     downloadFile(blobObject, 'hello.txt')
   }
-  
+
   function downloadFile(data, filename, mime) {
     var blob = new Blob([data], {type: mime || 'application/octet-stream'});
     if (typeof window.navigator.msSaveBlob !== 'undefined') {
