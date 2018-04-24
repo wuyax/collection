@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>Get Tree Data</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    img {
+      vertical-align: middle;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+  </style>
+</head>
+
+<body>
+
+</body>
+<script type="text/javascript">
+  let data = [
+    {
+      "createtime": "2018-04-19 14:47:04",
+      "icon": null,
+      "id": "78387bc7-439d-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "菜单管理",
+      "ordernum": null,
+      "pid": "bb1c23cc-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:47:04",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:46:58",
+      "icon": null,
+      "id": "74a8fe4b-439d-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "角色管理",
+      "ordernum": null,
+      "pid": "bb1c23cc-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:46:58",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:46:53",
+      "icon": null,
+      "id": "71a200fa-439d-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "用户管理",
+      "ordernum": null,
+      "pid": "bb1c23cc-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:46:53",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:46:46",
+      "icon": null,
+      "id": "6d9b4f35-439d-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "审计日志",
+      "ordernum": null,
+      "pid": "bb1c23cc-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:46:46",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:46:41",
+      "icon": null,
+      "id": "6af826f4-439d-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "系统日志",
+      "ordernum": null,
+      "pid": "bb1c23cc-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:46:41",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:46:36",
+      "icon": null,
+      "id": "6810f769-439d-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "部门管理",
+      "ordernum": null,
+      "pid": "bb1c23cc-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:46:36",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:45:58",
+      "icon": null,
+      "id": "514fb843-439d-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "日志管理",
+      "ordernum": null,
+      "pid": "0c4cf681-439d-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:45:58",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:45:53",
+      "icon": null,
+      "id": "4df64d18-439d-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "服务器监控",
+      "ordernum": null,
+      "pid": "0c4cf681-439d-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:45:53",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:45:45",
+      "icon": null,
+      "id": "4996c043-439d-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "监控",
+      "ordernum": null,
+      "pid": "0c4cf681-439d-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:45:45",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:45:26",
+      "icon": null,
+      "id": "3e4c6ad2-439d-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "任务管理",
+      "ordernum": null,
+      "pid": "0935730b-439d-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:45:26",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:45:01",
+      "icon": null,
+      "id": "2eeb0e28-439d-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "数据源管理",
+      "ordernum": null,
+      "pid": "0564a1fc-439d-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:45:01",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:44:53",
+      "icon": null,
+      "id": "2aac49c7-439d-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "前置机配置",
+      "ordernum": null,
+      "pid": "0564a1fc-439d-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:44:53",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:44:29",
+      "icon": null,
+      "id": "1c494e6b-439d-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "主页",
+      "ordernum": null,
+      "pid": "02d7e052-439d-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:44:29",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:44:03",
+      "icon": null,
+      "id": "0c4cf681-439d-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "任务监控",
+      "ordernum": null,
+      "pid": "93f54f29-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:44:03",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:43:57",
+      "icon": null,
+      "id": "0935730b-439d-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "交换服务配置",
+      "ordernum": null,
+      "pid": "93f54f29-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:43:57",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:43:51",
+      "icon": null,
+      "id": "0564a1fc-439d-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "基础配置",
+      "ordernum": null,
+      "pid": "93f54f29-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:43:51",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:43:47",
+      "icon": null,
+      "id": "02d7e052-439d-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "主页",
+      "ordernum": null,
+      "pid": "93f54f29-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:43:47",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:42:44",
+      "icon": null,
+      "id": "ddc2e806-439c-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "网站统计",
+      "ordernum": null,
+      "pid": "b701214c-439c-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:42:44",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:42:37",
+      "icon": null,
+      "id": "d91ca61e-439c-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "公共发布管理",
+      "ordernum": null,
+      "pid": "b701214c-439c-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:42:37",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:42:30",
+      "icon": null,
+      "id": "d550c189-439c-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "建议反馈管理",
+      "ordernum": null,
+      "pid": "b701214c-439c-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:42:30",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:42:25",
+      "icon": null,
+      "id": "d1e3c888-439c-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "问卷调查管理",
+      "ordernum": null,
+      "pid": "b701214c-439c-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:42:25",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:42:18",
+      "icon": null,
+      "id": "ce147866-439c-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "需求申请管理",
+      "ordernum": null,
+      "pid": "b701214c-439c-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:42:18",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:42:10",
+      "icon": null,
+      "id": "c8f802c7-439c-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "用户管理",
+      "ordernum": null,
+      "pid": "b701214c-439c-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:42:10",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:42:02",
+      "icon": null,
+      "id": "c49424af-439c-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "资源发布管理",
+      "ordernum": null,
+      "pid": "b701214c-439c-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:42:02",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:41:39",
+      "icon": null,
+      "id": "b701214c-439c-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "开放门户管理",
+      "ordernum": null,
+      "pid": "8a72ec08-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:41:39",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:40:51",
+      "icon": null,
+      "id": "9a5c5e17-439c-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "资源数据对接",
+      "ordernum": null,
+      "pid": "ed8d7334-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:40:51",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:40:30",
+      "icon": null,
+      "id": "8dc3d6c1-439c-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "订阅审批",
+      "ordernum": null,
+      "pid": "e0c47522-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:40:30",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:40:00",
+      "icon": null,
+      "id": "7babe9ab-439c-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "目录授权",
+      "ordernum": null,
+      "pid": "dcf5963f-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:40:00",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:39:56",
+      "icon": null,
+      "id": "792d155b-439c-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "目录统计",
+      "ordernum": null,
+      "pid": "dcf5963f-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:39:56",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:39:51",
+      "icon": null,
+      "id": "76661fe3-439c-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "目录发布",
+      "ordernum": null,
+      "pid": "dcf5963f-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:39:51",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:39:46",
+      "icon": null,
+      "id": "73793551-439c-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "目录汇总维护",
+      "ordernum": null,
+      "pid": "dcf5963f-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:39:46",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:39:33",
+      "icon": null,
+      "id": "6b84b31d-439c-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "分类目录维护",
+      "ordernum": null,
+      "pid": "dcf5963f-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:39:33",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:38:16",
+      "icon": null,
+      "id": "3d8efc78-439c-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "信息资源数据对接",
+      "ordernum": null,
+      "pid": "d4ddc513-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:38:16",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:37:33",
+      "icon": null,
+      "id": "2452a47f-439c-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "目录数据校核",
+      "ordernum": null,
+      "pid": "d4ddc513-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:37:33",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:37:17",
+      "icon": null,
+      "id": "1aae503a-439c-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "目录审核/报送",
+      "ordernum": null,
+      "pid": "d4ddc513-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:37:17",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:37:07",
+      "icon": null,
+      "id": "14976776-439c-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "子目录授权",
+      "ordernum": null,
+      "pid": "d4ddc513-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:37:07",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:37:02",
+      "icon": null,
+      "id": "11797de5-439c-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "子目录维护",
+      "ordernum": null,
+      "pid": "d4ddc513-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:37:02",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:36:53",
+      "icon": null,
+      "id": "0c5e7e1c-439c-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "目录导入",
+      "ordernum": null,
+      "pid": "d4ddc513-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:36:53",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:36:48",
+      "icon": null,
+      "id": "0947e957-439c-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "目录模板下载",
+      "ordernum": null,
+      "pid": "d4ddc513-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:36:48",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:36:41",
+      "icon": null,
+      "id": "05209c0a-439c-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "目录编辑",
+      "ordernum": null,
+      "pid": "d4ddc513-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:36:41",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:36:01",
+      "icon": null,
+      "id": "ed8d7334-439b-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "数据资源对接",
+      "ordernum": null,
+      "pid": "7c8e7c6e-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:36:01",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:35:40",
+      "icon": null,
+      "id": "e0c47522-439b-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "订阅管理",
+      "ordernum": null,
+      "pid": "7c8e7c6e-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:35:40",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:35:34",
+      "icon": null,
+      "id": "dcf5963f-439b-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "目录管理",
+      "ordernum": null,
+      "pid": "7c8e7c6e-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:35:34",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:35:20",
+      "icon": null,
+      "id": "d4ddc513-439b-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "目录编制/报送",
+      "ordernum": null,
+      "pid": "7c8e7c6e-439b-11e8-b895-000c299f8e6d",
+      "updatetime": "2018-04-19 14:35:20",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:34:37",
+      "icon": null,
+      "id": "bb1c23cc-439b-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "系统管理",
+      "ordernum": null,
+      "pid": "0",
+      "updatetime": "2018-04-19 14:34:37",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:33:57",
+      "icon": null,
+      "id": "a3a7ea3e-439b-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "大数据展示",
+      "ordernum": null,
+      "pid": "0",
+      "updatetime": "2018-04-19 14:33:57",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:33:31",
+      "icon": null,
+      "id": "93f54f29-439b-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "数据共享交换",
+      "ordernum": null,
+      "pid": "0",
+      "updatetime": "2018-04-19 14:33:31",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:33:15",
+      "icon": null,
+      "id": "8a72ec08-439b-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "开放门户管理",
+      "ordernum": null,
+      "pid": "0",
+      "updatetime": "2018-04-19 14:33:15",
+      "uri": null
+    },
+    {
+      "createtime": "2018-04-19 14:32:52",
+      "icon": null,
+      "id": "7c8e7c6e-439b-11e8-b895-000c299f8e6d",
+      "isdelete": 0,
+      "name": "目录管理",
+      "ordernum": null,
+      "pid": "0",
+      "updatetime": "2018-04-19 14:32:52",
+      "uri": null
+    }
+  ]
+
+
+  function findUniqueId(arr) {
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = 0; j < arr.length; j++) {
+        if(arr[i].pid === arr[j].id){
+          break
+        }
+        if(j >= arr.length-1){
+          return arr[i].pid
+        }
+      }
+    }
+  }
+
+  // let b = findUniqueId(data)
+  // console.log(b)
+  function handleTreeData4(oldArr) {
+    if (Array.isArray(oldArr)) {
+
+      function findUniqueId(arr) {
+        for (let i = 0; i < arr.length; i++) {
+          for (let j = 0; j < arr.length; j++) {
+            if(arr[i].pid === arr[j].id){
+              break
+            }
+            if(j >= arr.length-1){
+              return arr[i].pid
+            }
+          }
+        }
+      }
+      let  begin = findUniqueId(oldArr)
+
+      /**
+       * 递归调用函数
+       * @param fid 父级ID
+       * @return {Array} 拼装后的数组
+       */
+      function arrayToTree(pid) {
+        let newArr = []
+        for (let i = 0; i < oldArr.length; i++) {
+          if (oldArr[i].pid == pid) {
+            newArr.push({
+              ...oldArr[i],
+              children: arrayToTree(oldArr[i].id)
+            })
+            newArr.sort((a, b) => {
+              return a.ordernum - b.ordernum
+            })
+          }
+        }
+        return newArr
+      }
+      return arrayToTree(begin)
+    }
+  }
+  let a = handleTreeData4(data)
+  console.log(a)
+</script>
+</html>
