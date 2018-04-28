@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <script type="text/javascript" src="../../js/jquery-1.12.4.min.js"></script>
   <title>iframe sub1</title>
   <style type="text/css">
     * {
@@ -18,6 +19,7 @@
     ul, ol {
       list-style: none;
     }
+
     body, html {
       width: 1200px;
       height: 700px;
@@ -27,6 +29,23 @@
 </head>
 
 <body>
-
+<div class="box"></div>
+<button id="btn">send message to parent</button>
 </body>
+<script type="text/javascript">
+
+  // 监听hash值的变化
+  window.addEventListener('hashchange', function () {
+    $('.box').html(location.hash)
+  })
+  $(function () {
+    $('#btn').on('click', function () {
+      // 点用父页面的方法
+      parent.window.reciveMessage('from child')
+    })
+  });
+  function messageFroPar(msg) {
+    console.log(msg)
+  }
+</script>
 </html>

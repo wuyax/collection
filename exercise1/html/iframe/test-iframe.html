@@ -79,7 +79,7 @@
     iframe {
       position: absolute;
       top: 0px;
-      left: -100px;
+      /*left: -100px;*/
     }
   </style>
 </head>
@@ -99,9 +99,10 @@
       <li>上海</li>
       <li>广州</li>
     </ul>
+    <button id="btn">改变HASH</button>
   </div>
   <div class="container">
-    <iframe src="iframe-sub1.html" frameborder="0" height="700px" width="1244px">
+    <iframe id="ifr" name="ifr" src="iframe-sub1.html" frameborder="0" height="700px" width="1044px">
 
     </iframe>
   </div>
@@ -109,16 +110,35 @@
 </body>
 <script type="text/javascript" src="../../js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
+  $(function () {
+    window.addEventListener('hashchange', function () {
+      console.log('ggg')
+      console.log(location.hash)
+    })
+
     $('.leftnav ul').on('click','li',function (ev) {
       $('.leftnav ul li').removeClass('active')
       $(this).addClass('active')
       if($(this).context.innerHTML === '北京'){
-          $('iframe')[0].src = 'http://202.106.10.250:8877/#/product'
+        $('iframe')[0].src = 'iframe-sub1.html'
       } else if($(this).context.innerHTML === '上海') {
-        $('iframe')[0].src = 'https://css-tricks.com/?s=images&is_v=1'
+        $('iframe')[0].src = 'iframe-sub2.html'
       } else if($(this).context.innerHTML === '广州'){
         $('iframe')[0].src = 'iframe-sub3.html'
       }
     })
+    $('#btn').on('click',function () {
+     // 改变hash 值
+     $('#ifr')[0].src += '#test'
+      senMessageToChild()
+    })
+
+    function senMessageToChild() {
+      ifr.window.messageFroPar('message from parent')
+    }
+  });
+function reciveMessage(msg) {
+  console.log(msg)
+}
 </script>
 </html>
