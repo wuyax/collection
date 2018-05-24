@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <title>scale</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    img {
+      vertical-align: middle;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    html {
+      transform: scale(0.5, 0.4);
+    }
+
+    .box {
+      transform: scale(1.6, 1.6);
+      width: 1220px;
+      height: 456px;
+      background-color: #666;
+    }
+  </style>
+</head>
+
+<body>
+<div class="box">蚊子在咋合理展示</div>
+<div id="test"></div>
+</body>
+<!--<script type="module" src="../js/extend.js"></script>-->
+<!--<script type="module" src="./test.js"></script>-->
+<script type="module">
+  console.log(new Date('2015-05-22'))
+  let person = {
+    name: 'zhangsan',
+    age: 22
+  }
+  const {name} = person
+  console.log(name)
+
+  import {extend} from '../js/extend.js';
+
+  let x = extend(true, {
+    a: 'aa',
+    b: {
+      c: 'cc',
+      d: 'dd'
+    }
+  }, {
+    e: 'ee',
+    f: 'ff',
+    a: 'zz',
+    b: {
+      c: 'yy',
+      g: 'gg'
+    }
+  })
+
+  console.log(x)
+  console.log(this)
+</script>
+<script type="text/javascript" async>
+    console.log(this)
+</script>
+</html>
