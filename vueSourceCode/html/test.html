@@ -5,7 +5,8 @@
   <meta name="renderer" content="webkit">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
+  <script type="text/javascript" src="../js/vue.js"></script>
   <title>test MVVM</title>
   <style type="text/css">
     * {
@@ -50,6 +51,7 @@
   var vue = new Vue({
     data: options
   })
+  var i = 0
   getData()
 
   options.option1.name = 'zzz'
@@ -62,13 +64,17 @@
     vue.$watch(
       'option1',
       function (nv) {
+        i++
         console.log(nv.name)
+
       }, {
         deep: true
       })
   }
+  options.option1.name = 'hello kitty'
+
   setTimeout(function () {
-    options.option1.name = 'hello kitty'
+    options.option1.name = 'hello kitty2'
   },1000)
 </script>
 </html>

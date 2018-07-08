@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>table</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    img {
+      vertical-align: middle;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+    td {
+      width: 100px;
+      height: 22px;
+      border: 1px #000 solid;
+    }
+  </style>
+</head>
+
+<body>
+<div class="box">
+  <table>
+    <thead>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td rowspan="2">3433</td>
+      <td>3433</td>
+      <td rowspan="2">3433</td>
+      <td>3433</td>
+    </tr>
+    <tr>
+
+      <!--<td>45435</td>-->
+      <td>45435</td>
+      <td>45435</td>
+    </tr>
+    <tr>
+      <td>test</td>
+      <td>test</td>
+      <td>test</td>
+      <td>test</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+<script type="text/javascript">
+    var data = [{
+      e: [{
+        title: '组长',
+        name: 'zhangsan',
+        tel: 12345678,
+        addr: 'shanghai'
+      }],
+      ex: [{
+
+      }],
+      s: []
+    },{
+
+    }]
+  var html = ''
+  data.forEach(function (item, index) {
+    html += `<tr>
+      <td rowspan="${item.e.length+item.ex.length+item.s.length}">${index+1}</td>
+      <td>${item.ex.title}</td>
+      <td>${item.ex.name}</td>
+      <td>${item.ex.tel}</td>
+    </tr>`
+  })
+
+</script>
+</html>
