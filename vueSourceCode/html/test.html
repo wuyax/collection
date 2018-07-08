@@ -5,6 +5,7 @@
   <meta name="renderer" content="webkit">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <title>test MVVM</title>
   <style type="text/css">
     * {
@@ -23,6 +24,51 @@
 </head>
 
 <body>
-  <div class="test">this is a test</div>
+<div class="test">this is a test</div>
 </body>
+<script type="text/javascript" src="../js/MVVM.js"></script>
+<script type="text/javascript">
+  /*let vm = new MVVM({
+    data: {
+      name: 'zhangsan',
+      res: {
+        xAxisData: ['a','b','c','d','e'],
+        data: [1,2,3,14,45,4,6]
+      }
+    }
+  })*/
+  var options = {
+    option1: {
+      name: 'zhangsan',
+      res: {
+        xAxisData: ['a', 'b', 'c', 'd', 'e'],
+        data: [1, 2, 3, 14, 45, 4, 6]
+      }
+    }
+  }
+
+  var vue = new Vue({
+    data: options
+  })
+  getData()
+
+  options.option1.name = 'zzz'
+  // console.log(options.option1)
+  // console.log(vue)
+  function getData() {
+    /*setTimeout(function () {
+      options.option1.name = 'hello kitty'
+    })*/
+    vue.$watch(
+      'option1',
+      function (nv) {
+        console.log(nv.name)
+      }, {
+        deep: true
+      })
+  }
+  setTimeout(function () {
+    options.option1.name = 'hello kitty'
+  },1000)
+</script>
 </html>
