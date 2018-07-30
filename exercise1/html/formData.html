@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>formData</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    img {
+      vertical-align: middle;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+  </style>
+</head>
+
+<body>
+<form action="" id="formd">
+  <label for="usrname">
+    <span title="用户名：">用户名：</span>
+    <input type="text" name="username" id="usrname" value="12">
+  </label><label for="usrname">
+  <span title="密码：">密码：</span>
+  <input type="password" name="password" id="pwd" value="12">
+</label><label for="usrname">
+  <span title="email：">email：</span>
+  <input type="email" name="email" id="email" value="">
+</label><label for="usrname">
+  <span title="telphone：">手机：</span>
+  <input type="text" name="telephone" id="tel" value="">
+</label>
+</form>
+<button>提交</button>
+</body>
+<script type="text/javascript">
+  var btn = document.querySelector('button'), d,
+    keys = ['username', 'password', 'email', 'telephone', 'keys']
+  btn.addEventListener('click', (ev) => {
+    var formx = document.getElementById('formd')
+    d = new FormData(formx)
+    d.append('keys', 'testgogo')
+    for (let i = 0, len = keys.length; i < len; i++) {
+      console.log(keys[i] + ' = ' + d.get(keys[i]))
+    }
+  })
+</script>
+</html>
